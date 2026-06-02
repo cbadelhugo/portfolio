@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hugo Martin — Automation & Product Engineer</title>
+
+<!-- Open Graph / Social Preview -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hugomartin.dev/">
+<meta property="og:title" content="Hugo Martin — Automation & Product Engineer">
+<meta property="og:description" content="I build the software and systems behind content viewed 90M+ times. Full-stack apps, ML pipelines, video automation.">
+<meta property="og:image" content="https://hugomartin.dev/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hugo Martin — Automation & Product Engineer">
+<meta name="twitter:description" content="I build the software and systems behind content viewed 90M+ times.">
+<meta name="twitter:image" content="https://hugomartin.dev/og-image.png">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f4f0;
+    --grey-100: #1a1a1a;
+    --grey-200: #2a2a2a;
+    --grey-300: #555;
+    --grey-400: #888;
+    --yellow: #f0d44a;
+    --highlight: #c8b89a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 4rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: rgba(10,10,10,0.94);
+    backdrop-filter: blur(14px);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.35rem;
+    letter-spacing: 0.1em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--yellow); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--grey-400);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--yellow); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 4rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 50% 40% at 80% 25%, rgba(240,212,74,0.05) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(240,212,74,0.03) 0%, transparent 50%);
+  }
+  .hero-counter {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--grey-400);
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0s forwards;
+  }
+  .hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 12vw, 11rem);
+    line-height: 0.88;
+    color: var(--white);
+    position: relative; z-index: 1;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.15s forwards;
+  }
+  .hero-name .last { color: var(--yellow); }
+  .hero-title {
+    font-size: clamp(0.95rem, 1.7vw, 1.35rem);
+    font-weight: 300;
+    color: var(--white);
+    letter-spacing: 0.01em;
+    line-height: 1.5;
+    max-width: 720px;
+    margin-top: 1.6rem;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.3s forwards;
+  }
+  .hero-title b { color: var(--yellow); font-weight: 500; }
+  .hero-stats {
+    display: flex;
+    gap: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.45s forwards;
+    flex-wrap: wrap;
+  }
+  .hero-stat-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    color: var(--white);
+    line-height: 1;
+  }
+  .hero-stat-number.yellow { color: var(--yellow); }
+  .hero-stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--grey-400);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+    max-width: 160px;
+  }
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem; right: 4rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--grey-400);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .hero-scroll::before {
+    content: '';
+    display: block;
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--yellow));
+  }
+
+  /* SHARED */
+  section { padding: 7rem 4rem; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 0.93;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    font-size: 0.92rem;
+    color: var(--grey-400);
+    max-width: 620px;
+    line-height: 1.75;
+    margin-bottom: 3.5rem;
+  }
+  .divider { width: 100%; height: 1px; background: rgba(255,255,255,0.06); }
+
+  /* ENGINEERING CARDS */
+  .eng-grid { display: flex; flex-direction: column; gap: 2px; }
+  .eng-card {
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 3rem;
+    transition: border-color 0.3s;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 3rem;
+  }
+  .eng-card:hover { border-color: rgba(240,212,74,0.18); }
+  .eng-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--grey-400);
+    letter-spacing: 0.2em;
+    margin-bottom: 0.6rem;
+  }
+  .eng-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.6rem;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .eng-tagline {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--yellow);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+  .eng-desc {
+    font-size: 0.9rem;
+    color: var(--grey-400);
+    line-height: 1.75;
+    margin-bottom: 1.4rem;
+  }
+  .eng-desc b { color: var(--white); font-weight: 400; }
+  .eng-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.08em;
+    color: var(--grey-400);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 0.25rem 0.6rem;
+    text-transform: uppercase;
+  }
+  .eng-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.6rem;
+    border-left: 1px solid rgba(255,255,255,0.06);
+    padding-left: 3rem;
+  }
+  .eng-metric-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.6rem;
+    color: var(--white);
+    line-height: 1;
+  }
+  .eng-metric-value.yellow { color: var(--yellow); }
+  .eng-metric-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.57rem;
+    color: var(--grey-400);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+  .eng-status {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--yellow);
+    padding: 0.3rem 0.6rem;
+    align-self: flex-start;
+  }
+  .eng-status.grey { background: var(--grey-300); color: var(--white); }
+  .eng-repo {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(240,212,74,0.3);
+    padding-bottom: 0.15rem;
+    align-self: flex-start;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .eng-repo:hover { color: var(--white); border-color: var(--white); }
+
+  /* CASE STUDY — IMPACT */
+  .case-study {
+    border: 1px solid rgba(255,255,255,0.07);
+    margin: 0 0 2px;
+    padding: 3rem;
+    transition: border-color 0.3s;
+  }
+  .case-study:hover { border-color: rgba(240,212,74,0.18); }
+  .cs-header { margin-bottom: 2rem; }
+  .cs-number { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--grey-400); letter-spacing: 0.2em; margin-bottom: 0.6rem; }
+  .cs-channel { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; color: var(--white); line-height: 1; margin-bottom: 0.3rem; }
+  .cs-niche { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--yellow); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.8rem; }
+  .cs-role { font-size: 0.88rem; color: var(--grey-400); line-height: 1.7; max-width: 780px; }
+  .cs-videos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2.5rem; }
+  .video-item { display: flex; flex-direction: column; text-decoration: none; cursor: pointer; }
+  .video-thumb { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: var(--grey-200); margin-bottom: 0.6rem; }
+  .video-thumb img.static-thumb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.75; transition: opacity 0.35s ease; }
+  .video-thumb img.gif-preview { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.35s ease; }
+  .video-item:hover .static-thumb { opacity: 0; }
+  .video-item:hover .gif-preview { opacity: 1; }
+  .video-thumb-play { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); opacity: 0; transition: opacity 0.25s; }
+  .video-item:hover .video-thumb-play { opacity: 1; }
+  .play-icon { width: 36px; height: 36px; border-radius: 50%; background: rgba(240,212,74,0.92); display: flex; align-items: center; justify-content: center; }
+  .play-icon::after { content: ''; border-style: solid; border-width: 6px 0 6px 12px; border-color: transparent transparent transparent #0a0a0a; margin-left: 2px; }
+  .video-views { font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; color: var(--grey-300); line-height: 1; transition: color 0.2s; }
+  .video-item:hover .video-views { color: var(--yellow); }
+  .video-title { font-size: 0.75rem; color: var(--grey-400); margin-top: 0.2rem; line-height: 1.35; transition: color 0.2s; }
+  .video-item:hover .video-title { color: var(--white); }
+  .video-badge { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.5rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); background: var(--yellow); padding: 0.15rem 0.4rem; margin-top: 0.3rem; align-self: flex-start; }
+  .video-badge.grey { background: var(--grey-300); color: var(--white); }
+  .cs-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06); }
+  .cs-system { background: rgba(240,212,74,0.04); border: 1px solid rgba(240,212,74,0.1); padding: 1.2rem 1.4rem; }
+  .cs-system-label { font-family: 'DM Mono', monospace; font-size: 0.57rem; color: var(--yellow); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .cs-system-text { font-size: 0.83rem; color: var(--grey-400); line-height: 1.65; }
+  .cs-metrics { display: flex; flex-direction: column; justify-content: center; align-items: flex-end; gap: 1.2rem; }
+  .cs-metrics-row { display: flex; gap: 3rem; justify-content: flex-end; }
+  .metric-block { text-align: right; }
+  .metric-value { font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; color: var(--white); line-height: 1; }
+  .metric-value.yellow { color: var(--yellow); }
+  .metric-label { font-family: 'DM Mono', monospace; font-size: 0.57rem; color: var(--grey-400); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 0.2rem; }
+
+  /* CATALOG CHANNELS COMPACT GRID */
+  .catalog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 3.5rem; }
+  .catalog-card { border: 1px solid rgba(255,255,255,0.07); padding: 2rem; transition: border-color 0.3s; }
+  .catalog-card:hover { border-color: rgba(240,212,74,0.18); }
+  .catalog-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--white); line-height: 1; margin-bottom: 0.3rem; }
+  .catalog-niche { font-family: 'DM Mono', monospace; font-size: 0.57rem; color: var(--yellow); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .catalog-videos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin-bottom: 1.2rem; }
+  .catalog-video { text-decoration: none; display: flex; flex-direction: column; }
+  .catalog-thumb { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: var(--grey-200); margin-bottom: 0.4rem; }
+  .catalog-thumb > img:not(.gif-preview) { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: opacity 0.25s, transform 0.3s; }
+  .catalog-thumb img.gif-preview { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.35s ease; }
+  .catalog-video:hover .catalog-thumb > img:not(.gif-preview) { opacity: 0; transform: scale(1.04); }
+  .catalog-video:hover .catalog-thumb img.gif-preview { opacity: 1; }
+  .catalog-thumb-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); opacity: 0; transition: opacity 0.2s; }
+  .catalog-video:hover .catalog-thumb-play { opacity: 1; }
+  .catalog-views { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--grey-300); transition: color 0.2s; line-height: 1; }
+  .catalog-video:hover .catalog-views { color: var(--yellow); }
+  .catalog-vid-title { font-size: 0.65rem; color: var(--grey-400); line-height: 1.3; margin-top: 0.15rem; }
+  .catalog-stats { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.06); }
+  .catalog-stat { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--grey-400); letter-spacing: 0.08em; }
+  .catalog-stat span { color: var(--white); font-size: 0.75rem; }
+  .catalog-role { font-size: 0.8rem; color: var(--grey-400); line-height: 1.6; }
+  .play-sm { width: 24px; height: 24px; border-radius: 50%; background: rgba(240,212,74,0.9); display: flex; align-items: center; justify-content: center; }
+  .play-sm::after { content: ''; border-style: solid; border-width: 4px 0 4px 8px; border-color: transparent transparent transparent #0a0a0a; margin-left: 1px; }
+
+  /* CAPABILITIES */
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .service-card { border: 1px solid rgba(255,255,255,0.07); padding: 2.5rem; transition: border-color 0.3s; }
+  .service-card:hover { border-color: rgba(240,212,74,0.15); }
+  .service-number { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--grey-400); letter-spacing: 0.2em; margin-bottom: 1.2rem; }
+  .service-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--white); margin-bottom: 1rem; line-height: 1.1; }
+  .service-desc { font-size: 0.83rem; color: var(--grey-400); line-height: 1.7; margin-bottom: 1.5rem; }
+  .service-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  /* STACK */
+  .tools-section { background: var(--black); }
+  .tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+  .tools-group-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--yellow); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem; }
+  .tools-list { display: flex; flex-direction: column; gap: 0.7rem; }
+  .tool-item { font-size: 0.88rem; color: var(--grey-400); padding-left: 1rem; border-left: 1px solid rgba(255,255,255,0.08); transition: color 0.2s, border-color 0.2s; }
+  .tool-item:hover { color: var(--white); border-left-color: var(--yellow); }
+
+  /* CONTACT */
+  .contact-section { min-height: 45vh; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
+  .contact-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 80% at 50% 50%, rgba(240,212,74,0.04) 0%, transparent 70%); }
+  .contact-cta { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 8vw, 7.5rem); line-height: 0.9; color: var(--white); margin-bottom: 3rem; position: relative; z-index: 1; }
+  .contact-cta span { color: var(--yellow); }
+  .contact-links { display: flex; gap: 3rem; flex-wrap: wrap; position: relative; z-index: 1; }
+  .contact-link { display: flex; flex-direction: column; gap: 0.3rem; text-decoration: none; }
+  .contact-link-label { font-family: 'DM Mono', monospace; font-size: 0.57rem; color: var(--grey-400); letter-spacing: 0.2em; text-transform: uppercase; }
+  .contact-link-value { font-size: 0.92rem; color: var(--white); transition: color 0.2s; }
+  .contact-link:hover .contact-link-value { color: var(--yellow); }
+
+  footer { padding: 2rem 4rem; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; }
+  .footer-name { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--grey-400); letter-spacing: 0.12em; text-transform: uppercase; }
+  .footer-copy { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--grey-300); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+
+  .wrap { margin: 0 4rem 2px; }
+  .wrap-last { margin: 0 4rem 4rem; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    .nav-links { gap: 1.3rem; }
+    section { padding: 5rem 2rem; }
+    .hero { padding: 0 2rem 4rem; }
+    .hero-stats { gap: 2rem; }
+    .eng-card { grid-template-columns: 1fr; gap: 2rem; padding: 2rem; }
+    .eng-side { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1.6rem; flex-direction: row; flex-wrap: wrap; gap: 2rem; }
+    .case-study { margin: 0 2rem 2px; padding: 2rem; }
+    .cs-videos { grid-template-columns: repeat(3, 1fr); gap: 0.7rem; }
+    .cs-bottom { grid-template-columns: 1fr; gap: 1.5rem; }
+    .cs-metrics { align-items: flex-start; }
+    .cs-metrics-row { justify-content: flex-start; }
+    .catalog-grid { grid-template-columns: repeat(2, 1fr); }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .tools-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .wrap { margin: 0 2rem 2px; }
+    .wrap-last { margin: 0 2rem 4rem; }
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 1rem 1.2rem; flex-wrap: wrap; gap: 0.5rem; }
+    .nav-links { gap: 0.8rem; }
+    .nav-links a { font-size: 0.58rem; letter-spacing: 0.06em; }
+    section { padding: 4rem 1.2rem; }
+    .hero { padding: 0 1.2rem 3.5rem; }
+    .hero-name { font-size: clamp(3.5rem, 16vw, 6rem); }
+    .hero-title { font-size: 1rem; }
+    .hero-stats { gap: 1.5rem; }
+    .hero-stat-number { font-size: 1.9rem; }
+    .hero-scroll { display: none; }
+    .section-title { font-size: clamp(2.2rem, 9vw, 3.5rem); }
+    .eng-card { margin: 0; }
+    .case-study { margin: 0 0 2px; padding: 1.5rem; }
+    .cs-channel { font-size: 2rem; }
+    .cs-videos { grid-template-columns: 1fr; gap: 1rem; }
+    .cs-bottom { grid-template-columns: 1fr; }
+    .cs-metrics-row { flex-wrap: wrap; gap: 1.5rem; }
+    .metric-value { font-size: 2.2rem; }
+    .catalog-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .contact-cta { font-size: clamp(2.5rem, 10vw, 4rem); }
+    .contact-links { gap: 2rem; }
+    footer { padding: 1.5rem 1.2rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    .wrap { margin: 0 0 2px; }
+    .wrap-last { margin: 0 0 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Hugo <span>Martin</span></a>
+  <ul class="nav-links">
+    <li><a href="#systems">Systems</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#capabilities">What I Do</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-counter">Automation &amp; Product Engineer — Bogotá, Colombia · Remote</div>
+  <h1 class="hero-name">Hugo<br><span class="last">Martin</span></h1>
+  <p class="hero-title">I build the <b>software and systems</b> behind content that's been viewed <b>90M+ times</b> — full-stack apps, ML pipelines, and video automation that turn manual work into infrastructure.</p>
+  <div class="hero-stats">
+    <div>
+      <div class="hero-stat-number yellow">90M+</div>
+      <div class="hero-stat-label">Views Driven by My Systems</div>
+    </div>
+    <div>
+      <div class="hero-stat-number">4</div>
+      <div class="hero-stat-label">Production Apps &amp; Pipelines Built</div>
+    </div>
+    <div>
+      <div class="hero-stat-number yellow">1</div>
+      <div class="hero-stat-label">App Live on the App Store</div>
+    </div>
+    <div>
+      <div class="hero-stat-number">40+</div>
+      <div class="hero-stat-label">Videos / Week Across My Systems</div>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SYSTEMS & ENGINEERING -->
+<section id="systems" style="padding-bottom: 2rem;">
+  <div class="section-label">Systems &amp; Engineering — Selected Work</div>
+  <h2 class="section-title">Software<br>I've Shipped</h2>
+  <p class="section-sub">Full-stack applications, machine-learning pipelines, and automation I designed and built end-to-end — from product spec to deployment. Most started as a bottleneck in my own work that I turned into software.</p>
+</section>
+
+<div class="eng-grid" style="margin: 0 4rem 4rem;">
+
+  <!-- ENG 1: PUZZLR -->
+  <div class="eng-card">
+    <div>
+      <div class="eng-number">01 / 05</div>
+      <div class="eng-name">Puzzlr</div>
+      <div class="eng-tagline">iOS + Android App · Built &amp; Shipped Solo</div>
+      <p class="eng-desc">A cross-platform mobile app for jigsaw-puzzle collectors — track your collection, time builds, and capture boxes with the camera. I built <b>the entire product end-to-end</b>: architecture, UI, on-device ML, payments, backend sync, CI, and store submission. Features <b>on-device OCR (Google ML Kit) with a Gemini fallback</b>, bidirectional mobile↔web sync over Supabase Realtime, and a RevenueCat subscription paywall.</p>
+      <div class="eng-tags">
+        <span class="tag">React Native</span>
+        <span class="tag">Expo SDK 54</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Zustand</span>
+        <span class="tag">Supabase</span>
+        <span class="tag">On-Device ML / OCR</span>
+        <span class="tag">RevenueCat IAP</span>
+        <span class="tag">Sentry · PostHog</span>
+        <span class="tag">EAS · App Store</span>
+      </div>
+    </div>
+    <div class="eng-side">
+      <span class="eng-status">Live on the App Store</span>
+      <div>
+        <div class="eng-metric-value yellow">19</div>
+        <div class="eng-metric-label">Screens Shipped</div>
+      </div>
+      <div>
+        <div class="eng-metric-value">iOS+Android</div>
+        <div class="eng-metric-label">Single Codebase + 6-Lang Landing</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENG 2: LINER -->
+  <div class="eng-card">
+    <div>
+      <div class="eng-number">02 / 05</div>
+      <div class="eng-name">Liner</div>
+      <div class="eng-tagline">Desktop Video-Production Engine · ML + FFmpeg</div>
+      <p class="eng-desc">A macOS production app I built to make <b>10+ lyric videos a week</b> possible — a volume that's simply not achievable by hand. It runs a full ML pipeline (<b>Mel-RoFormer vocal isolation → Whisper large-v3 transcription → forced alignment</b>) to sync official lyrics to exact word-level timestamps, then renders 4K video <b>server-side with FFmpeg <code>drawtext</code> and hardware encoding</b> — cutting a 1-hour render from 20+ minutes to 3–5. ~15K lines of code across a Node/Express backend, a vanilla-JS SPA, and Python ML scripts.</p>
+      <div class="eng-tags">
+        <span class="tag">Node.js · Express</span>
+        <span class="tag">Python · PyTorch</span>
+        <span class="tag">FFmpeg</span>
+        <span class="tag">Whisper large-v3</span>
+        <span class="tag">Mel-RoFormer</span>
+        <span class="tag">Forced Alignment</span>
+        <span class="tag">WebCodecs</span>
+        <span class="tag">HW Encoding (VideoToolbox)</span>
+      </div>
+    </div>
+    <div class="eng-side">
+      <span class="eng-status">In Production</span>
+      <a href="https://github.com/cbadelhugo/liner" target="_blank" class="eng-repo">View source on GitHub →</a>
+      <div>
+        <div class="eng-metric-value yellow">~15K</div>
+        <div class="eng-metric-label">Lines of Code</div>
+      </div>
+      <div>
+        <div class="eng-metric-value">90+</div>
+        <div class="eng-metric-label">Videos Produced</div>
+      </div>
+      <div>
+        <div class="eng-metric-value">4–6×</div>
+        <div class="eng-metric-label">Faster Render vs. Canvas Capture</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENG 3: WEAVE -->
+  <div class="eng-card">
+    <div>
+      <div class="eng-number">03 / 05</div>
+      <div class="eng-name">Weave</div>
+      <div class="eng-tagline">AI-Agent Video Editor · Local-First · Python + LLM</div>
+      <p class="eng-desc">A local-first editor that turns a raw 2-hour Zoom recording into a finished, branded video — automatically. An agent transcribes (whisper.cpp on Metal), detects cuts with refined heuristics (dead air, filler words, false starts, Zoom chatter), and uses <b>Claude to find the strongest narrative hook</b> and reorder for it — every decision auditable and reversible. Renders 4K with <b>concurrent FFmpeg + hardware encoding</b> (a 2-hour video in ~20 min) and exports either an MP4 or a Premiere bridge. <b>In production: 3+ videos/week</b> for a coaching brand, cutting ~6 hours of manual editing per video.</p>
+      <div class="eng-tags">
+        <span class="tag">Python 3.12</span>
+        <span class="tag">whisper.cpp · Metal</span>
+        <span class="tag">Claude SDK (LLM)</span>
+        <span class="tag">FFmpeg · concurrent</span>
+        <span class="tag">MediaPipe · OpenCV</span>
+        <span class="tag">Tauri · React (UI)</span>
+        <span class="tag">Click · Pydantic</span>
+      </div>
+    </div>
+    <div class="eng-side">
+      <span class="eng-status">In Production</span>
+      <a href="https://github.com/cbadelhugo/weave" target="_blank" class="eng-repo">View source on GitHub →</a>
+      <div>
+        <div class="eng-metric-value yellow">~6 hrs</div>
+        <div class="eng-metric-label">Manual Editing Saved / Video</div>
+      </div>
+      <div>
+        <div class="eng-metric-value">46%</div>
+        <div class="eng-metric-label">Runtime Auto-Trimmed (2h → 1h)</div>
+      </div>
+      <div>
+        <div class="eng-metric-value">Hybrid</div>
+        <div class="eng-metric-label">LLM + Heuristic, Cloud-Free Core</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENG 4: CONTENT AUTOMATION SUITE -->
+  <div class="eng-card">
+    <div>
+      <div class="eng-number">04 / 05</div>
+      <div class="eng-name">Content Automation Suite</div>
+      <div class="eng-tagline">~15 Internal Tools · Web Apps + Pipelines</div>
+      <p class="eng-desc">A suite of internal tools I built to run content production across <b>~50 YouTube channels</b>. Highlights: a browser-automation + GraphQL pipeline that created <b>21 multi-track compilations (240+ tracks) in a single unattended 59-minute run</b>; a <b>Next.js 16 photo-sourcing app</b> with multi-source scraping and headless-browser anti-bot bypass (Getty, Pinterest); a <b>computer-vision pipeline</b> (NudeNet/EraX + OpenCV + FFmpeg) that scans 10–15-hour concerts and auto-applies blur; and batch Gemini image generation/upscaling running as <b>self-hosted Docker services behind a reverse proxy</b>. Each system documented with handoff specs so a team can operate it.</p>
+      <div class="eng-tags">
+        <span class="tag">Next.js 16 · React 19</span>
+        <span class="tag">Python</span>
+        <span class="tag">Browser Automation · GraphQL</span>
+        <span class="tag">OpenCV · Computer Vision</span>
+        <span class="tag">Playwright</span>
+        <span class="tag">FFmpeg · Sharp</span>
+        <span class="tag">Vertex AI · Gemini</span>
+        <span class="tag">Docker · Self-Hosted</span>
+        <span class="tag">Google Cloud / Drive API</span>
+      </div>
+    </div>
+    <div class="eng-side">
+      <span class="eng-status grey">Internal · In Use</span>
+      <div>
+        <div class="eng-metric-value yellow">~50</div>
+        <div class="eng-metric-label">Channels Powered</div>
+      </div>
+      <div>
+        <div class="eng-metric-value">21 / 59min</div>
+        <div class="eng-metric-label">Compilations, One Unattended Run</div>
+      </div>
+      <div>
+        <div class="eng-metric-value">10K+</div>
+        <div class="eng-metric-label">Images Auto-Organized</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENG 5: PRODUCTION AUTOMATION -->
+  <div class="eng-card">
+    <div>
+      <div class="eng-number">05 / 05</div>
+      <div class="eng-name">Production Automation</div>
+      <div class="eng-tagline">Adobe Extensions · Programmatic Brand Systems</div>
+      <p class="eng-desc">Automation that lives inside the creative tools themselves. I built an <b>Adobe Premiere CEP panel (ExtendScript / QE DOM)</b> that batch-applies ripple-delete edits from timecodes — turning a 1-hour live recording into a finished cut in a single pass. For freelance music clients I wrote <b>~5.6K lines of Python</b> that generate brand identities, thumbnails, and lyric-video projects programmatically, with fuzzy audio↔lyric matching and adaptive typographic layout.</p>
+      <div class="eng-tags">
+        <span class="tag">ExtendScript / JSX</span>
+        <span class="tag">Adobe CEP</span>
+        <span class="tag">Python · Pillow</span>
+        <span class="tag">SVG · rsvg</span>
+        <span class="tag">Fuzzy Matching</span>
+        <span class="tag">Bash</span>
+      </div>
+    </div>
+    <div class="eng-side">
+      <span class="eng-status grey">Freelance · Billed</span>
+      <div>
+        <div class="eng-metric-value yellow">5.6K</div>
+        <div class="eng-metric-label">Lines of Python (ONErpm)</div>
+      </div>
+      <div>
+        <div class="eng-metric-value">4</div>
+        <div class="eng-metric-label">Channels Run Single-Handed</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="divider"></div>
+
+<!-- IMPACT / CREATIVE TRACK RECORD -->
+<section id="impact" style="padding-bottom: 2rem;">
+  <div class="section-label">Proof of Impact — Creative Track Record</div>
+  <h2 class="section-title">90M+ Views<br>of Real Output</h2>
+  <p class="section-sub">The systems above don't run in a vacuum — they produce content for official artist channels and music catalogs with millions of followers. This is the measurable, real-world impact behind the engineering: content I produced and directed, viewed tens of millions of times.</p>
+</section>
+
+<!-- CS 1: BIGXTHAPLUG -->
+<div class="case-study wrap">
+  <div class="cs-header">
+    <div class="cs-number">01 / 05</div>
+    <div class="cs-channel">BigXthaPlug</div>
+    <div class="cs-niche">Hip-Hop · Official Artist Channel · 1.7M Subscribers</div>
+    <p class="cs-role">Lyric video production and visual content for BigXthaPlug's official YouTube channel. Three featured pieces — from kinetic text animation to full video compilation with animated backgrounds — accumulating over 22M combined views.</p>
+  </div>
+  <div class="cs-videos">
+    <a href="https://www.youtube.com/watch?v=QPmGzXoXYW8" target="_blank" class="video-item">
+      <div class="video-thumb">
+        <img class="static-thumb" src="https://i.ytimg.com/vi/QPmGzXoXYW8/maxresdefault.jpg" alt="Holy Ground" loading="lazy">
+        <img class="gif-preview" src="" alt="" data-gif="bigx_holy.gif">
+        <div class="video-thumb-play"><div class="play-icon"></div></div>
+      </div>
+      <div class="video-views">10M</div>
+      <div class="video-title">BigXthaPlug - Holy Ground (Official Lyric Video)</div>
+      <span class="video-badge">Text Animation</span>
+    </a>
+    <a href="https://www.youtube.com/watch?v=m7-C15MoO2o" target="_blank" class="video-item">
+      <div class="video-thumb">
+        <img class="static-thumb" src="https://i.ytimg.com/vi/m7-C15MoO2o/maxresdefault.jpg" alt="All The Way" loading="lazy">
+        <img class="gif-preview" src="" alt="" data-gif="bigx_alltheway.gif">
+        <div class="video-thumb-play"><div class="play-icon"></div></div>
+      </div>
+      <div class="video-views">8.8M</div>
+      <div class="video-title">BigXthaPlug - All The Way (Official Lyric Video)</div>
+      <span class="video-badge">Text Animation</span>
+    </a>
+    <a href="https://www.youtube.com/watch?v=i0hiBagVYVg" target="_blank" class="video-item">
+      <div class="video-thumb">
+        <img class="static-thumb" src="https://i.ytimg.com/vi/i0hiBagVYVg/maxresdefault.jpg" alt="Therapy Session" loading="lazy">
+        <img class="gif-preview" src="" alt="" data-gif="bigx_therapy.gif">
+        <div class="video-thumb-play"><div class="play-icon"></div></div>
+      </div>
+      <div class="video-views">3.1M</div>
+      <div class="video-title">BigXthaPlug - Therapy Session (Official Lyric Video)</div>
+      <span class="video-badge">Video + Background + Text</span>
+    </a>
+  </div>
+  <div class="cs-bottom">
+    <div class="cs-system">
+      <div class="cs-system-label">My Role</div>
+      <div class="cs-system-text">Produced lyric videos for the official channel — kinetic text animation on Holy Ground and All The Way, and a full production combining video cuts, animated background, and text for Therapy Session. 17 videos total, ~30M total views.</div>
+    </div>
+    <div class="cs-metrics">
+      <div class="cs-metrics-row">
+        <div class="metric-block"><div class="metric-value yellow">10M</div><div class="metric-label">Top Video Views</div></div>
+        <div class="metric-block"><div class="metric-value">~30M</div><div class="metric-label">Channel Total Views</div></div>
+        <div class="metric-block"><div class="metric-value">17</div><div class="metric-label">Videos</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CS 2: LINDA RONSTADT -->
+<div class="case-study wrap">
+  <div class="cs-header">
+    <div class="cs-number">02 / 05</div>
+    <div class="cs-channel">Linda Ronstadt</div>
+    <div class="cs-niche">Pop · Rock · Official Artist Channel · 353K Subscribers</div>
+    <p class="cs-role">Visual content production for Linda Ronstadt's official YouTube channel — lyric videos with animated backgrounds, kinetic typography, and compilation overlays across a catalog spanning rock, pop, and Latin heritage.</p>
+  </div>
+  <div class="cs-videos">
+    <a href="https://www.youtube.com/watch?v=kEZxTTRWrlQ" target="_blank" class="video-item">
+      <div class="video-thumb">
+        <img class="static-thumb" src="https://i.ytimg.com/vi/kEZxTTRWrlQ/maxresdefault.jpg" alt="All My Life" loading="lazy">
+        <img class="gif-preview" src="" alt="" data-gif="linda_1.gif">
+        <div class="video-thumb-play"><div class="play-icon"></div></div>
+      </div>
+      <div class="video-views">383K</div>
+      <div class="video-title">Linda Ronstadt - All My Life (Official Lyric Video)</div>
+      <span class="video-badge">Text + Animated Background</span>
+    </a>
+    <a href="https://www.youtube.com/watch?v=LRPH47f7G4M" target="_blank" class="video-item">
+      <div class="video-thumb">
+        <img class="static-thumb" src="https://i.ytimg.com/vi/LRPH47f7G4M/maxresdefault.jpg" alt="Don't Know Much" loading="lazy">
+        <img class="gif-preview" src="" alt="" data-gif="linda_2.gif">
+        <div class="video-thumb-play"><div class="play-icon"></div></div>
+      </div>
+      <div class="video-views">301K</div>
+      <div class="video-title">Linda Ronstadt - Don't Know Much (Official Lyric Video)</div>
+      <span class="video-badge">Text Animation</span>
+    </a>
+    <a href="https://www.youtube.com/watch?v=XeljF30il5Q" target="_blank" class="video-item">
+      <div class="video-thumb">
+        <img class="static-thumb" src="https://i.ytimg.com/vi/XeljF30il5Q/maxresdefault.jpg" alt="Mexican Heritage" loading="lazy">
+        <img class="gif-preview" src="" alt="" data-gif="linda_3.gif">
+        <div class="video-thumb-play"><div class="play-icon"></div></div>
+      </div>
+      <div class="video-views">216K</div>
+      <div class="video-title">Linda Ronstadt - Mexican Heritage Collection</div>
+      <span class="video-badge">Overlay + Compilation</span>
+    </a>
+  </div>
+  <div class="cs-bottom">
+    <div class="cs-system">
+      <div class="cs-system-label">My Role</div>
+      <div class="cs-system-text">Produced lyric videos and compilation content for the official channel. All My Life features animated text over a custom illustrated background; Don't Know Much is clean kinetic typography; Mexican Heritage combines archival footage overlays with compilation editing. 43 videos, ~3M total views.</div>
+    </div>
+    <div class="cs-metrics">
+      <div class="cs-metrics-row">
+        <div class="metric-block"><div class="metric-value yellow">383K</div><div class="metric-label">Top Video Views</div></div>
+        <div class="metric-block"><div class="metric-value">~3M</div><div class="metric-label">Channel Total Views</div></div>
+        <div class="metric-block"><div class="metric-value">43</div><div class="metric-label">Videos</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CS 3: DEAN MARTIN -->
+<div class="case-study wrap">
+  <div class="cs-header">
+    <div class="cs-number">03 / 05</div>
+    <div class="cs-channel">Dean Martin</div>
+    <div class="cs-niche">Classic Pop · Lounge · Official Artist Channel · 334K Subscribers</div>
+    <p class="cs-role">Lyric video and compilation production for Dean Martin's official YouTube channel — from animated lyric videos to curated greatest-hits compilations, building a consistent visual identity across the catalog.</p>
+  </div>
+  <div class="cs-videos">
+    <a href="https://www.youtube.com/watch?v=0jN9GeP2NRs" target="_blank" class="video-item">
+      <div class="video-thumb">
+        <img class="static-thumb" src="https://i.ytimg.com/vi/0jN9GeP2NRs/maxresdefault.jpg" alt="Dean Martin Essentials" loading="lazy">
+        <img class="gif-preview" src="" alt="" data-gif="dean_1.gif">
+        <div class="video-thumb-play"><div class="play-icon"></div></div>
+      </div>
+      <div class="video-views">245K</div>
+      <div class="video-title">Dean Martin Essentials | Fan Favorites Collection</div>
+      <span class="video-badge">Compilation</span>
+    </a>
+    <a href="https://www.youtube.com/watch?v=iJ4pMhOH_bQ" target="_blank" class="video-item">
+      <div class="video-thumb">
+        <img class="static-thumb" src="https://i.ytimg.com/vi/iJ4pMhOH_bQ/maxresdefault.jpg" alt="Silver Bells" loading="lazy">
+        <img class="gif-preview" src="" alt="" data-gif="dean_2.gif">
+        <div class="video-thumb-play"><div class="play-icon"></div></div>
+      </div>
+      <div class="video-views">204K</div>
+      <div class="video-title">Silver Bells (Official Lyric Video)</div>
+      <span class="video-badge">Animated Background + Text</span>
+    </a>
+    <a href="https://www.youtube.com/watch?v=VbCRl70Ez1c" target="_blank" class="video-item">
+      <div class="video-thumb">
+        <img class="static-thumb" src="https://i.ytimg.com/vi/VbCRl70Ez1c/maxresdefault.jpg" alt="Dean Martin Classics" loading="lazy">
+        <img class="gif-preview" src="" alt="" data-gif="dean_3.gif">
+        <div class="video-thumb-play"><div class="play-icon"></div></div>
+      </div>
+      <div class="video-views">104K</div>
+      <div class="video-title">Dean Martin Classics | Timeless Lounge Hits</div>
+      <span class="video-badge">Compilation</span>
+    </a>
+  </div>
+  <div class="cs-bottom">
+    <div class="cs-system">
+      <div class="cs-system-label">My Role</div>
+      <div class="cs-system-text">Produced compilation and lyric videos for the official channel. Silver Bells is a full lyric video with custom animated holiday background and kinetic text; Essentials and Classics are curated compilation edits. 27 videos, ~1.3M total views.</div>
+    </div>
+    <div class="cs-metrics">
+      <div class="cs-metrics-row">
+        <div class="metric-block"><div class="metric-value yellow">245K</div><div class="metric-label">Top Video Views</div></div>
+        <div class="metric-block"><div class="metric-value">~1.3M</div><div class="metric-label">Channel Total Views</div></div>
+        <div class="metric-block"><div class="metric-value">27</div><div class="metric-label">Videos</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CS 4: FRANK SINATRA -->
+<div class="case-study wrap">
+  <div class="cs-header">
+    <div class="cs-number">04 / 05</div>
+    <div class="cs-channel">Frank Sinatra</div>
+    <div class="cs-niche">Jazz · Classic Pop · Official Artist Channel · 2.91M Subscribers</div>
+    <p class="cs-role">Lyric video and holiday compilation production for Frank Sinatra's official YouTube channel — content built for one of the most iconic catalogs in recorded music history.</p>
+  </div>
+  <div class="cs-videos">
+    <a href="https://www.youtube.com/watch?v=vezL6I3YYcs" target="_blank" class="video-item">
+      <div class="video-thumb">
+        <img class="static-thumb" src="https://i.ytimg.com/vi/vezL6I3YYcs/maxresdefault.jpg" alt="World On A String" loading="lazy">
+        <img class="gif-preview" src="" alt="" data-gif="frank_1.gif">
+        <div class="video-thumb-play"><div class="play-icon"></div></div>
+      </div>
+      <div class="video-views">48K</div>
+      <div class="video-title">I've Got The World On A String (Official Lyric Video)</div>
+      <span class="video-badge">Text Lyric Video</span>
+    </a>
+    <a href="https://www.youtube.com/watch?v=3iFpXNVVH3Y" target="_blank" class="video-item">
+      <div class="video-thumb">
+        <img class="static-thumb" src="https://i.ytimg.com/vi/3iFpXNVVH3Y/maxresdefault.jpg" alt="Holiday Favorites" loading="lazy">
+        <img class="gif-preview" src="" alt="" data-gif="frank_2.gif">
+        <div class="video-thumb-play"><div class="play-icon"></div></div>
+      </div>
+      <div class="video-views">81K</div>
+      <div class="video-title">Frank Sinatra Holiday Favorites</div>
+      <span class="video-badge">Background + Text + Compilation</span>
+    </a>
+    <div></div>
+  </div>
+  <div class="cs-bottom">
+    <div class="cs-system">
+      <div class="cs-system-label">My Role</div>
+      <div class="cs-system-text">Produced lyric videos and compilation content for the official channel. World On A String is a clean text lyric video; Holiday Favorites combines an animated background, lyric text, and compilation editing. 12 videos, ~4.1M total views.</div>
+    </div>
+    <div class="cs-metrics">
+      <div class="cs-metrics-row">
+        <div class="metric-block"><div class="metric-value yellow">~4.1M</div><div class="metric-label">Channel Total Views</div></div>
+        <div class="metric-block"><div class="metric-value">12</div><div class="metric-label">Videos</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CS 5: BRENT FAIYAZ -->
+<div class="case-study wrap wrap-last">
+  <div class="cs-header">
+    <div class="cs-number">05 / 05</div>
+    <div class="cs-channel">Brent Faiyaz</div>
+    <div class="cs-niche">R&amp;B · Soul · Official Artist Channel · 1.95M Subscribers</div>
+    <p class="cs-role">Full album compilation produced for Brent Faiyaz's official YouTube channel — a single cohesive visual piece covering the complete Icono project.</p>
+  </div>
+  <div class="cs-videos">
+    <a href="https://www.youtube.com/watch?v=La0fFFPu6wQ" target="_blank" class="video-item">
+      <div class="video-thumb">
+        <img class="static-thumb" src="https://i.ytimg.com/vi/La0fFFPu6wQ/maxresdefault.jpg" alt="Icono" loading="lazy">
+        <img class="gif-preview" src="" alt="" data-gif="brent_1.gif">
+        <div class="video-thumb-play"><div class="play-icon"></div></div>
+      </div>
+      <div class="video-views">35K</div>
+      <div class="video-title">Brent Faiyaz - Icono (Full Album)</div>
+      <span class="video-badge">Full Album Compilation</span>
+    </a>
+    <div></div>
+    <div></div>
+  </div>
+  <div class="cs-bottom">
+    <div class="cs-system">
+      <div class="cs-system-label">My Role</div>
+      <div class="cs-system-text">Produced the full album compilation video for Icono — edited to present the complete album as a single continuous piece for the official channel.</div>
+    </div>
+    <div class="cs-metrics">
+      <div class="cs-metrics-row">
+        <div class="metric-block"><div class="metric-value yellow">35K</div><div class="metric-label">Views</div></div>
+        <div class="metric-block"><div class="metric-value">1</div><div class="metric-label">Video</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CATALOG CHANNELS -->
+<section id="catalog">
+  <div class="section-label">Catalog Channels — Systems That Scale</div>
+  <h2 class="section-title">Built to<br>Run at Volume</h2>
+  <p class="section-sub">Music catalog channels where I designed the full visual system and production pipeline — template architecture, AI workflows, and compilation editing built to perform at scale. This is where the engineering and the creative work meet.</p>
+  <div class="catalog-grid">
+
+    <div class="catalog-card">
+      <div class="catalog-name">The Pulse Music</div>
+      <div class="catalog-niche">Alt Rock · Nu Metal · 2000s</div>
+      <div class="catalog-videos">
+        <a href="https://www.youtube.com/watch?v=A2Ojfv3ziXg" target="_blank" class="catalog-video">
+          <div class="catalog-thumb">
+            <img src="https://i.ytimg.com/vi/A2Ojfv3ziXg/maxresdefault.jpg" alt="Hybrid Theory" loading="lazy">
+            <img class="gif-preview" src="" alt="" data-gif="hybrid_theory.gif">
+            <div class="catalog-thumb-play"><div class="play-sm"></div></div>
+          </div>
+          <div class="catalog-views">4.3M</div>
+          <div class="catalog-vid-title">Linkin Park - Hybrid Theory</div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=FSOz83aPO28" target="_blank" class="catalog-video">
+          <div class="catalog-thumb">
+            <img src="https://i.ytimg.com/vi/FSOz83aPO28/maxresdefault.jpg" alt="From Zero" loading="lazy">
+            <img class="gif-preview" src="" alt="" data-gif="pulse_2.gif">
+            <div class="catalog-thumb-play"><div class="play-sm"></div></div>
+          </div>
+          <div class="catalog-views">2.6M</div>
+          <div class="catalog-vid-title">Linkin Park - From Zero</div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=zTEe03vjyEQ" target="_blank" class="catalog-video">
+          <div class="catalog-thumb">
+            <img src="https://i.ytimg.com/vi/zTEe03vjyEQ/maxresdefault.jpg" alt="LP Greatest Hits" loading="lazy">
+            <img class="gif-preview" src="" alt="" data-gif="pulse_3.gif">
+            <div class="catalog-thumb-play"><div class="play-sm"></div></div>
+          </div>
+          <div class="catalog-views">1.8M</div>
+          <div class="catalog-vid-title">Linkin Park Greatest Hits</div>
+        </a>
+      </div>
+      <div class="catalog-stats">
+        <div class="catalog-stat">Subscribers — <span>119K</span></div>
+        <div class="catalog-stat">Total Views — <span>33.1M</span></div>
+        <div class="catalog-stat">Videos — <span>126</span></div>
+      </div>
+      <p class="catalog-role">Creative direction, AI motion backgrounds, thumbnail design, and compilation editing across the full catalog. Every video passed through my pipeline — launched February 2025.</p>
+    </div>
+
+    <div class="catalog-card">
+      <div class="catalog-name">Lost Kids</div>
+      <div class="catalog-niche">Brent Faiyaz · R&amp;B · Soul</div>
+      <div class="catalog-videos">
+        <a href="https://www.youtube.com/watch?v=JfYDAJhcBsM" target="_blank" class="catalog-video">
+          <div class="catalog-thumb">
+            <img src="https://i.ytimg.com/vi/JfYDAJhcBsM/maxresdefault.jpg" alt="bedroom r&b" loading="lazy">
+            <img class="gif-preview" src="" alt="" data-gif="lost_kids_1.gif">
+            <div class="catalog-thumb-play"><div class="play-sm"></div></div>
+          </div>
+          <div class="catalog-views">1.05M</div>
+          <div class="catalog-vid-title">bedroom r&b playlist</div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=NxEsZdCAVCE" target="_blank" class="catalog-video">
+          <div class="catalog-thumb">
+            <img src="https://i.ytimg.com/vi/NxEsZdCAVCE/maxresdefault.jpg" alt="r&b to unwind to" loading="lazy">
+            <img class="gif-preview" src="" alt="" data-gif="lost_kids_2.gif">
+            <div class="catalog-thumb-play"><div class="play-sm"></div></div>
+          </div>
+          <div class="catalog-views">450K</div>
+          <div class="catalog-vid-title">r&b to unwind to</div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=CH1JwcSseMA" target="_blank" class="catalog-video">
+          <div class="catalog-thumb">
+            <img src="https://i.ytimg.com/vi/CH1JwcSseMA/maxresdefault.jpg" alt="gang over luv" loading="lazy">
+            <img class="gif-preview" src="" alt="" data-gif="lost_kids_3.gif">
+            <div class="catalog-thumb-play"><div class="play-sm"></div></div>
+          </div>
+          <div class="catalog-views">219K</div>
+          <div class="catalog-vid-title">gang over luv (lyrics)</div>
+        </a>
+      </div>
+      <div class="catalog-stats">
+        <div class="catalog-stat">Subscribers — <span>76.7K</span></div>
+        <div class="catalog-stat">AI Thumbnail Views — <span>3.24M</span></div>
+      </div>
+      <p class="catalog-role">Designed the visual system, AI thumbnail pipeline, lyric videos, and mix compilations. Trained a custom AI model on the artist's likeness to generate unlimited context-specific images — ~⅓ of top 40 videos run on AI thumbnails.</p>
+    </div>
+
+    <div class="catalog-card">
+      <div class="catalog-name">TheDoorsHQ</div>
+      <div class="catalog-niche">The Doors · Classic Rock · Psychedelic</div>
+      <div class="catalog-videos">
+        <a href="https://www.youtube.com/watch?v=FMlx9trfx94" target="_blank" class="catalog-video">
+          <div class="catalog-thumb">
+            <img src="https://i.ytimg.com/vi/FMlx9trfx94/hqdefault.jpg" alt="Roadhouse Blues" loading="lazy">
+            <img class="gif-preview" src="" alt="" data-gif="doors_1.gif">
+            <div class="catalog-thumb-play"><div class="play-sm"></div></div>
+          </div>
+          <div class="catalog-views">862K</div>
+          <div class="catalog-vid-title">Roadhouse Blues (Lyric Video)</div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=ZS06FDfqKho" target="_blank" class="catalog-video">
+          <div class="catalog-thumb">
+            <img src="https://i.ytimg.com/vi/ZS06FDfqKho/maxresdefault.jpg" alt="Love Songs" loading="lazy">
+            <img class="gif-preview" src="" alt="" data-gif="doors_2.gif">
+            <div class="catalog-thumb-play"><div class="play-sm"></div></div>
+          </div>
+          <div class="catalog-views">246K</div>
+          <div class="catalog-vid-title">Love Songs By The Doors</div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=49RUvms4GnQ" target="_blank" class="catalog-video">
+          <div class="catalog-thumb">
+            <img src="https://i.ytimg.com/vi/49RUvms4GnQ/maxresdefault.jpg" alt="Best of The Doors" loading="lazy">
+            <img class="gif-preview" src="" alt="" data-gif="doors_3.gif">
+            <div class="catalog-thumb-play"><div class="play-sm"></div></div>
+          </div>
+          <div class="catalog-views">244K</div>
+          <div class="catalog-vid-title">Best of The Doors</div>
+        </a>
+      </div>
+      <div class="catalog-stats">
+        <div class="catalog-stat">Subscribers — <span>5.84K</span></div>
+        <div class="catalog-stat">Total Views — <span>2.41M</span></div>
+        <div class="catalog-stat">To Monetization — <span>8 days</span></div>
+      </div>
+      <p class="catalog-role">Full creative ownership — channel identity, visual system, lyric videos, and playlist compilations. Reached YouTube's monetization threshold in 8 days from launch.</p>
+    </div>
+
+    <div class="catalog-card">
+      <div class="catalog-name">Full Spin</div>
+      <div class="catalog-niche">Classic Rock · Vinyl Experience · Full Albums</div>
+      <div class="catalog-videos">
+        <a href="https://www.youtube.com/watch?v=LfwJdWHjkGY" target="_blank" class="catalog-video">
+          <div class="catalog-thumb">
+            <img src="https://i.ytimg.com/vi/LfwJdWHjkGY/maxresdefault.jpg" alt="Van Halen 1984" loading="lazy">
+            <img class="gif-preview" src="" alt="" data-gif="fullspin_1.gif">
+            <div class="catalog-thumb-play"><div class="play-sm"></div></div>
+          </div>
+          <div class="catalog-views">762K</div>
+          <div class="catalog-vid-title">Van Halen - 1984</div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=zXlRBCBcMjY" target="_blank" class="catalog-video">
+          <div class="catalog-thumb">
+            <img src="https://i.ytimg.com/vi/zXlRBCBcMjY/maxresdefault.jpg" alt="Fleetwood Mac Rumours" loading="lazy">
+            <img class="gif-preview" src="" alt="" data-gif="fullspin_2.gif">
+            <div class="catalog-thumb-play"><div class="play-sm"></div></div>
+          </div>
+          <div class="catalog-views">428K</div>
+          <div class="catalog-vid-title">Fleetwood Mac - Rumours</div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=rn4EBjEHPlo" target="_blank" class="catalog-video">
+          <div class="catalog-thumb">
+            <img src="https://i.ytimg.com/vi/rn4EBjEHPlo/maxresdefault.jpg" alt="The Cars" loading="lazy">
+            <img class="gif-preview" src="" alt="" data-gif="fullspin_3.gif">
+            <div class="catalog-thumb-play"><div class="play-sm"></div></div>
+          </div>
+          <div class="catalog-views">301K</div>
+          <div class="catalog-vid-title">The Cars - The Cars</div>
+        </a>
+      </div>
+      <div class="catalog-stats">
+        <div class="catalog-stat">Subscribers — <span>24.9K</span></div>
+        <div class="catalog-stat">Views Since System Launch — <span>2.66M</span></div>
+        <div class="catalog-stat">Videos with New System — <span>62</span></div>
+      </div>
+      <p class="catalog-role">Designed the adaptive vinyl template system — colors, label art, and tracklist pulled directly from each album's artwork. Same structure every time, never looks the same twice.</p>
+    </div>
+
+    <div class="catalog-card">
+      <div class="catalog-name">Kiki.mp3</div>
+      <div class="catalog-niche">2000s Nostalgia · Alt Rock · Emo</div>
+      <div class="catalog-videos">
+        <a href="https://youtu.be/XEuU5vhr8c4" target="_blank" class="catalog-video">
+          <div class="catalog-thumb">
+            <img src="https://i.ytimg.com/vi/XEuU5vhr8c4/maxresdefault.jpg" alt="soundtrack of the 2000s" loading="lazy">
+            <img class="gif-preview" src="" alt="" data-gif="kiki_1.gif">
+            <div class="catalog-thumb-play"><div class="play-sm"></div></div>
+          </div>
+          <div class="catalog-views">1M</div>
+          <div class="catalog-vid-title">the soundtrack of the 2000s</div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=ZRhXcF5m8NQ" target="_blank" class="catalog-video">
+          <div class="catalog-thumb">
+            <img src="https://i.ytimg.com/vi/ZRhXcF5m8NQ/maxresdefault.jpg" alt="mall punk memories" loading="lazy">
+            <img class="gif-preview" src="" alt="" data-gif="kiki_2.gif">
+            <div class="catalog-thumb-play"><div class="play-sm"></div></div>
+          </div>
+          <div class="catalog-views">381K</div>
+          <div class="catalog-vid-title">2000s mall punk memories</div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=Pye5o3YyWLA" target="_blank" class="catalog-video">
+          <div class="catalog-thumb">
+            <img src="https://i.ytimg.com/vi/Pye5o3YyWLA/maxresdefault.jpg" alt="basement party 2009" loading="lazy">
+            <img class="gif-preview" src="" alt="" data-gif="kiki_3.gif">
+            <div class="catalog-thumb-play"><div class="play-sm"></div></div>
+          </div>
+          <div class="catalog-views">203K</div>
+          <div class="catalog-vid-title">basement party 2009</div>
+        </a>
+      </div>
+      <div class="catalog-stats">
+        <div class="catalog-stat">Total Views — <span>2.93M</span></div>
+        <div class="catalog-stat">System Coverage — <span>70% of Top 20 Videos</span></div>
+      </div>
+      <p class="catalog-role">Designed a personalized background system on a reusable animation base — each video gets thematic props, band posters, and era objects. 70% of top 20 videos use this system, accumulating 84% of top 20 total views.</p>
+    </div>
+
+    <div class="catalog-card">
+      <div class="catalog-name">Classic Rock Revival</div>
+      <div class="catalog-niche">Classic Rock · 60s 70s 80s · Full Albums</div>
+      <div class="catalog-videos">
+        <a href="https://www.youtube.com/watch?v=ZT_PIY2DC1U" target="_blank" class="catalog-video">
+          <div class="catalog-thumb">
+            <img src="https://i.ytimg.com/vi/ZT_PIY2DC1U/maxresdefault.jpg" alt="Best of Fleetwood Mac" loading="lazy">
+            <img class="gif-preview" src="" alt="" data-gif="crr_1.gif">
+            <div class="catalog-thumb-play"><div class="play-sm"></div></div>
+          </div>
+          <div class="catalog-views">1.4M</div>
+          <div class="catalog-vid-title">Best of Fleetwood Mac</div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=aFqupp_W7uY" target="_blank" class="catalog-video">
+          <div class="catalog-thumb">
+            <img src="https://i.ytimg.com/vi/aFqupp_W7uY/maxresdefault.jpg" alt="Ultimate Classic Rock" loading="lazy">
+            <img class="gif-preview" src="" alt="" data-gif="crr_2.gif">
+            <div class="catalog-thumb-play"><div class="play-sm"></div></div>
+          </div>
+          <div class="catalog-views">918K</div>
+          <div class="catalog-vid-title">Ultimate Classic Rock</div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=2jadQW-zITo" target="_blank" class="catalog-video">
+          <div class="catalog-thumb">
+            <img src="https://i.ytimg.com/vi/2jadQW-zITo/maxresdefault.jpg" alt="70s Acoustic Rock" loading="lazy">
+            <img class="gif-preview" src="" alt="" data-gif="crr_3.gif">
+            <div class="catalog-thumb-play"><div class="play-sm"></div></div>
+          </div>
+          <div class="catalog-views">626K</div>
+          <div class="catalog-vid-title">70s Acoustic Rock</div>
+        </a>
+      </div>
+      <div class="catalog-stats">
+        <div class="catalog-stat">Subscribers — <span>29.6K</span></div>
+        <div class="catalog-stat">Total Views — <span>4.4M</span></div>
+        <div class="catalog-stat">Videos — <span>52</span></div>
+      </div>
+      <p class="catalog-role">Creative direction across the full catalog — thumbnails, compilation editing, and channel identity for a destination channel celebrating the golden era of rock.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CAPABILITIES -->
+<section id="capabilities">
+  <div class="section-label">What I Do</div>
+  <h2 class="section-title">Capabilities</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-number">01</div>
+      <div class="service-name">Automation &amp; Tooling</div>
+      <p class="service-desc">I find the bottleneck in a manual workflow and replace it with software — CLIs, internal web apps, API orchestration, and batch pipelines that turn hours of repetitive work into a single command.</p>
+      <div class="service-tags">
+        <span class="tag">Python</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">REST / API Integration</span>
+        <span class="tag">Headless Browsers</span>
+        <span class="tag">Cron / Scheduling</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-number">02</div>
+      <div class="service-name">Full-Stack &amp; Mobile</div>
+      <p class="service-desc">End-to-end product builds — from data model and backend to UI and store submission. I've shipped a production mobile app solo and built multiple Next.js web apps with real auth, payments, and sync.</p>
+      <div class="service-tags">
+        <span class="tag">React / Next.js</span>
+        <span class="tag">React Native / Expo</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Supabase / Postgres</span>
+        <span class="tag">IAP / Stripe</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-number">03</div>
+      <div class="service-name">Media &amp; ML Pipelines</div>
+      <p class="service-desc">Programmatic video and image processing at scale — FFmpeg render pipelines, computer-vision moderation, audio ML (transcription, vocal isolation, forced alignment), and generative-AI workflows wired into real production.</p>
+      <div class="service-tags">
+        <span class="tag">FFmpeg</span>
+        <span class="tag">OpenCV</span>
+        <span class="tag">Whisper</span>
+        <span class="tag">Computer Vision</span>
+        <span class="tag">Generative AI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- STACK -->
+<section class="tools-section" id="stack">
+  <div class="section-label">Stack</div>
+  <h2 class="section-title" style="margin-bottom: 3rem;">Tools &amp; Tech</h2>
+  <div class="tools-grid">
+    <div>
+      <div class="tools-group-label">Languages &amp; Frameworks</div>
+      <div class="tools-list">
+        <div class="tool-item">Python</div>
+        <div class="tool-item">TypeScript / JavaScript</div>
+        <div class="tool-item">React · Next.js</div>
+        <div class="tool-item">React Native · Expo</div>
+        <div class="tool-item">Node.js · Express</div>
+        <div class="tool-item">Bash · ExtendScript</div>
+      </div>
+    </div>
+    <div>
+      <div class="tools-group-label">Media · ML · Data</div>
+      <div class="tools-list">
+        <div class="tool-item">FFmpeg · Sharp · OpenCV</div>
+        <div class="tool-item">Whisper · Forced Alignment</div>
+        <div class="tool-item">Computer Vision (NudeNet / EraX)</div>
+        <div class="tool-item">PyTorch · Pillow</div>
+        <div class="tool-item">Playwright (automation)</div>
+        <div class="tool-item">Supabase · PostgreSQL</div>
+      </div>
+    </div>
+    <div>
+      <div class="tools-group-label">Infra · Creative</div>
+      <div class="tools-list">
+        <div class="tool-item">Google Cloud · Drive API</div>
+        <div class="tool-item">EAS · App Store / Play Console</div>
+        <div class="tool-item">Sentry · PostHog</div>
+        <div class="tool-item">Git · CI/CD</div>
+        <div class="tool-item">Premiere · After Effects</div>
+        <div class="tool-item">Generative AI (Midjourney · Veo · Runway)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="contact-bg"></div>
+  <div style="position:relative;z-index:1;">
+    <h2 class="contact-cta">Let's Build<br><span>Something.</span></h2>
+    <div class="contact-links">
+      <a href="mailto:cbadelhugo@gmail.com" class="contact-link">
+        <span class="contact-link-label">Email</span>
+        <span class="contact-link-value">cbadelhugo@gmail.com</span>
+      </a>
+      <a href="https://wa.me/573123871795" class="contact-link" target="_blank">
+        <span class="contact-link-label">WhatsApp</span>
+        <span class="contact-link-value">+57 312 387 1795</span>
+      </a>
+      <a href="https://github.com/cbadelhugo" class="contact-link" target="_blank">
+        <span class="contact-link-label">GitHub</span>
+        <span class="contact-link-value">@cbadelhugo</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-name">Hugo Martin — Automation &amp; Product Engineer · Bogotá, Colombia · Remote</span>
+  <span class="footer-copy">2026</span>
+</footer>
+
+<script>
+  // GIF hover — lazy load on first hover
+  document.querySelectorAll('.video-item, .catalog-video').forEach(item => {
+    const gifImg = item.querySelector('.gif-preview');
+    if (!gifImg) return;
+    const gifSrc = gifImg.dataset.gif;
+    if (!gifSrc) return;
+    let loaded = false;
+    item.addEventListener('mouseenter', () => {
+      if (!loaded) { gifImg.src = gifSrc; loaded = true; }
+    });
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.eng-card, .case-study, .catalog-card, .service-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
