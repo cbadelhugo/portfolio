@@ -3,892 +3,640 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hugo Martin — Creative Technologist & Creative Operations Lead</title>
+<title>Hugo Martín — Creative Technologist & Creative Operations Lead</title>
+<meta name="description" content="I find the bottleneck, design the system, and let the output prove it. Creative operations across ~50 YouTube channels (90M+ views) — plus the software that scales them.">
 
-<!-- Open Graph / Social Preview -->
+<!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cbadelhugo.github.io/portfolio/">
-<meta property="og:title" content="Hugo Martin — Creative Technologist & Creative Operations Lead">
-<meta property="og:description" content="I build and lead the creative systems — and the software — behind content viewed 90M+ times.">
+<meta property="og:title" content="Hugo Martín — Creative Technologist & Creative Operations Lead">
+<meta property="og:description" content="I find the bottleneck, design the system, and let the output prove it.">
 <meta property="og:image" content="https://cbadelhugo.github.io/portfolio/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Hugo Martin — Creative Technologist & Creative Operations Lead">
-<meta name="twitter:description" content="I build and lead the creative systems — and the software — behind content viewed 90M+ times.">
-<meta name="twitter:image" content="https://cbadelhugo.github.io/portfolio/og-image.png">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
-  :root {
-    --black: #0a0a0a;
-    --white: #f5f4f0;
-    --grey-100: #1a1a1a;
-    --grey-200: #2a2a2a;
-    --grey-300: #555;
-    --grey-400: #888;
-    --yellow: #f0d44a;
-    --highlight: #c8b89a;
-  }
+:root{
+  --ink:#1A1A18;
+  --paper:#F5F3EC;
+  --paper-2:#EEEBE0;
+  --graphite:#6B6B66;
+  --line:rgba(26,26,24,0.12);
+  --line-strong:rgba(26,26,24,0.28);
+  --amber:#B89545;
+  --amber-bright:#CBB674;
+  --before:#9a9a92;
+  --display:'Space Grotesk',sans-serif;
+  --body:'IBM Plex Sans',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+  --pad:clamp(1.4rem,5vw,5.5rem);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:72px;-webkit-font-smoothing:antialiased;}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-weight:400;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+/* paper grain + faint grid */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(var(--line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:64px 64px;
+  opacity:0.35;
+  mask-image:radial-gradient(ellipse 120% 80% at 50% 0%,#000 25%,transparent 80%);
+}
+body::after{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.wrap{position:relative;z-index:1;}
+a{color:inherit;text-decoration:none;}
+::selection{background:var(--amber-bright);color:var(--ink);}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-  }
+/* ---------- NAV ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.1rem var(--pad);
+  background:rgba(245,243,236,0.82);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.logo{font-family:var(--display);font-weight:700;font-size:1.05rem;letter-spacing:-0.01em;}
+.logo .dot{color:var(--amber);}
+.nav-links{display:flex;gap:2rem;}
+.nav-links a{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--graphite);transition:color .2s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-cta{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;border:1px solid var(--line-strong);padding:0.5rem 0.9rem;border-radius:2px;transition:all .2s;}
+.nav-cta:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+@media(max-width:760px){.nav-links{display:none;}}
 
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.4rem 4rem;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    background: rgba(10,10,10,0.94);
-    backdrop-filter: blur(14px);
-  }
-  .nav-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.35rem;
-    letter-spacing: 0.1em;
-    color: var(--white);
-    text-decoration: none;
-  }
-  .nav-logo span { color: var(--yellow); }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--grey-400);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--yellow); }
+/* ---------- HERO ---------- */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem var(--pad) 3rem;}
+.eyebrow{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--graphite);display:flex;align-items:center;gap:0.7rem;margin-bottom:2rem;}
+.eyebrow .tick{width:8px;height:8px;background:var(--amber);border-radius:50%;animation:pulse 2.4s ease infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.8);}}
+.hero h1{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(2.6rem,7vw,6.2rem);
+  line-height:0.98;letter-spacing:-0.03em;
+  max-width:18ch;
+}
+.hero h1 em{font-style:normal;color:var(--amber);}
+.hero-sub{font-size:clamp(1rem,1.5vw,1.2rem);max-width:60ch;margin-top:1.8rem;color:#3a3a36;}
+.hero-sub b{font-weight:500;color:var(--ink);}
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 4rem 6rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 50% 40% at 80% 25%, rgba(240,212,74,0.05) 0%, transparent 60%),
-      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(240,212,74,0.03) 0%, transparent 50%);
-  }
-  .hero-counter {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    color: var(--grey-400);
-    margin-bottom: 2rem;
-    text-transform: uppercase;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0s forwards;
-  }
-  .hero-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(5rem, 12vw, 11rem);
-    line-height: 0.88;
-    color: var(--white);
-    position: relative; z-index: 1;
-    opacity: 0;
-    animation: fadeUp 0.9s ease 0.15s forwards;
-  }
-  .hero-name .last { color: var(--yellow); }
-  .hero-title {
-    font-size: clamp(0.95rem, 1.7vw, 1.35rem);
-    font-weight: 300;
-    color: var(--white);
-    letter-spacing: 0.01em;
-    line-height: 1.5;
-    max-width: 720px;
-    margin-top: 1.6rem;
-    margin-bottom: 3rem;
-    opacity: 0;
-    animation: fadeUp 0.9s ease 0.3s forwards;
-  }
-  .hero-title b { color: var(--yellow); font-weight: 500; }
-  .hero-stats {
-    display: flex;
-    gap: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    opacity: 0;
-    animation: fadeUp 0.9s ease 0.45s forwards;
-    flex-wrap: wrap;
-  }
-  .hero-stat-number {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.8rem;
-    color: var(--white);
-    line-height: 1;
-  }
-  .hero-stat-number.yellow { color: var(--yellow); }
-  .hero-stat-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    color: var(--grey-400);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-top: 0.3rem;
-    max-width: 160px;
-  }
-  .hero-scroll {
-    position: absolute;
-    bottom: 2rem; right: 4rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    color: var(--grey-400);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    writing-mode: vertical-rl;
-    display: flex; align-items: center; gap: 1rem;
-  }
-  .hero-scroll::before {
-    content: '';
-    display: block;
-    width: 1px; height: 60px;
-    background: linear-gradient(to bottom, transparent, var(--yellow));
-  }
+/* signature before/after */
+.signature{margin-top:3.2rem;border:1px solid var(--line-strong);background:rgba(255,255,255,0.35);max-width:760px;}
+.sig-head{display:flex;justify-content:space-between;align-items:center;padding:0.7rem 1.1rem;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--graphite);}
+.sig-body{padding:1.6rem 1.1rem 1.4rem;}
+.ba-row{display:flex;align-items:flex-end;gap:clamp(1rem,4vw,3rem);}
+.ba-item{flex:0 0 auto;}
+.ba-item .v{font-family:var(--display);font-weight:700;line-height:0.85;font-size:clamp(2.8rem,8vw,5rem);}
+.ba-item.is-before .v{color:var(--before);}
+.ba-item.is-after .v{color:var(--amber);}
+.ba-item .v .u{font-size:0.32em;font-family:var(--mono);font-weight:400;letter-spacing:0.04em;}
+.ba-item .k{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--graphite);margin-top:0.6rem;}
+.ba-arrow{flex:1 1 auto;display:flex;flex-direction:column;align-items:center;gap:0.4rem;padding-bottom:1.4rem;min-width:60px;}
+.ba-track{width:100%;height:2px;background:var(--line);position:relative;}
+.ba-fill{position:absolute;left:0;top:0;height:100%;width:0;background:var(--amber);}
+.ba-arrow .delta{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.08em;color:var(--ink);background:var(--amber-bright);padding:0.15rem 0.5rem;border-radius:2px;white-space:nowrap;}
+.scroll-cue{margin-top:3.5rem;font-family:var(--mono);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--graphite);display:flex;align-items:center;gap:0.8rem;}
+.scroll-cue .bar{width:46px;height:1px;background:var(--graphite);position:relative;overflow:hidden;}
+.scroll-cue .bar::after{content:'';position:absolute;inset:0;background:var(--amber);transform:translateX(-100%);animation:slide 2s ease infinite;}
+@keyframes slide{50%{transform:translateX(0);}100%{transform:translateX(100%);}}
 
-  /* SHARED */
-  section { padding: 7rem 4rem; }
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--yellow);
-    margin-bottom: 0.8rem;
-  }
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(3rem, 6vw, 5.5rem);
-    line-height: 0.93;
-    color: var(--white);
-    margin-bottom: 1rem;
-  }
-  .section-sub {
-    font-size: 0.92rem;
-    color: var(--grey-400);
-    max-width: 620px;
-    line-height: 1.75;
-    margin-bottom: 3.5rem;
-  }
-  .divider { width: 100%; height: 1px; background: rgba(255,255,255,0.06); }
+/* ---------- SECTION SHELL ---------- */
+section{padding:clamp(4.5rem,9vw,9rem) var(--pad);position:relative;}
+.sec-head{margin-bottom:3.5rem;}
+.sec-label{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:1rem;display:flex;align-items:center;gap:0.6rem;}
+.sec-label::before{content:'';width:24px;height:1px;background:var(--amber);}
+.sec-title{font-family:var(--display);font-weight:700;font-size:clamp(2.2rem,5vw,4rem);line-height:0.98;letter-spacing:-0.02em;max-width:20ch;}
+.sec-intro{font-size:1rem;color:#3a3a36;max-width:62ch;margin-top:1.2rem;}
+.rule{height:1px;background:var(--line);margin:0 var(--pad);position:relative;z-index:1;}
 
-  /* ENGINEERING CARDS */
-  .eng-grid { display: flex; flex-direction: column; gap: 2px; }
-  .eng-card {
-    border: 1px solid rgba(255,255,255,0.07);
-    padding: 3rem;
-    transition: border-color 0.3s;
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 3rem;
-  }
-  .eng-card:hover { border-color: rgba(240,212,74,0.18); }
-  .eng-number {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    color: var(--grey-400);
-    letter-spacing: 0.2em;
-    margin-bottom: 0.6rem;
-  }
-  .eng-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.6rem;
-    color: var(--white);
-    line-height: 1;
-    margin-bottom: 0.3rem;
-  }
-  .eng-tagline {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    color: var(--yellow);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 1.2rem;
-  }
-  .eng-desc {
-    font-size: 0.9rem;
-    color: var(--grey-400);
-    line-height: 1.75;
-    margin-bottom: 1.4rem;
-  }
-  .eng-desc b { color: var(--white); font-weight: 400; }
-  .eng-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.52rem;
-    letter-spacing: 0.08em;
-    color: var(--grey-400);
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 0.25rem 0.6rem;
-    text-transform: uppercase;
-  }
-  .eng-side {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1.6rem;
-    border-left: 1px solid rgba(255,255,255,0.06);
-    padding-left: 3rem;
-  }
-  .eng-metric-value {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.6rem;
-    color: var(--white);
-    line-height: 1;
-  }
-  .eng-metric-value.yellow { color: var(--yellow); }
-  .eng-metric-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.57rem;
-    color: var(--grey-400);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-top: 0.3rem;
-  }
-  .eng-status {
-    display: inline-block;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.55rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--black);
-    background: var(--yellow);
-    padding: 0.3rem 0.6rem;
-    align-self: flex-start;
-  }
-  .eng-status.grey { background: var(--grey-300); color: var(--white); }
-  .eng-repo {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--yellow);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(240,212,74,0.3);
-    padding-bottom: 0.15rem;
-    align-self: flex-start;
-    transition: color 0.2s, border-color 0.2s;
-  }
-  .eng-repo:hover { color: var(--white); border-color: var(--white); }
+/* ---------- TEARDOWNS ---------- */
+.teardown{border-top:1px solid var(--line);}
+.td-top{display:flex;align-items:baseline;gap:1.2rem;font-family:var(--mono);font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--graphite);margin-bottom:2rem;}
+.td-top .num{color:var(--amber);font-weight:500;}
+.td-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:center;}
+.td-label{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--graphite);margin-bottom:0.7rem;}
+.td-narrative h3{font-family:var(--display);font-weight:600;font-size:clamp(1.7rem,3.2vw,2.6rem);line-height:1.05;letter-spacing:-0.02em;margin-bottom:1.6rem;}
+.td-narrative h3 em{font-style:normal;color:var(--amber);}
+.td-system{font-size:1rem;color:#3a3a36;margin-bottom:1.2rem;}
+.td-system b{font-weight:500;color:var(--ink);}
+.td-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1.4rem;}
+.tag{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--graphite);border:1px solid var(--line-strong);padding:0.3rem 0.6rem;border-radius:2px;}
 
-  /* CASE STUDY — IMPACT */
-  .case-study {
-    border: 1px solid rgba(255,255,255,0.07);
-    margin: 0 0 2px;
-    padding: 3rem;
-    transition: border-color 0.3s;
-  }
-  .case-study:hover { border-color: rgba(240,212,74,0.18); }
-  .cs-header { margin-bottom: 2rem; }
-  .cs-number { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--grey-400); letter-spacing: 0.2em; margin-bottom: 0.6rem; }
-  .cs-channel { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; color: var(--white); line-height: 1; margin-bottom: 0.3rem; }
-  .cs-niche { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--yellow); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.8rem; }
-  .cs-role { font-size: 0.88rem; color: var(--grey-400); line-height: 1.7; max-width: 780px; }
-  .cs-videos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2.5rem; }
-  .video-item { display: flex; flex-direction: column; text-decoration: none; cursor: pointer; }
-  .video-thumb { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: var(--grey-200); margin-bottom: 0.6rem; }
-  .video-thumb img.static-thumb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.75; transition: opacity 0.35s ease; }
-  .video-thumb img.gif-preview { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.35s ease; }
-  .video-item:hover .static-thumb { opacity: 0; }
-  .video-item:hover .gif-preview { opacity: 1; }
-  .video-thumb-play { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); opacity: 0; transition: opacity 0.25s; }
-  .video-item:hover .video-thumb-play { opacity: 1; }
-  .play-icon { width: 36px; height: 36px; border-radius: 50%; background: rgba(240,212,74,0.92); display: flex; align-items: center; justify-content: center; }
-  .play-icon::after { content: ''; border-style: solid; border-width: 6px 0 6px 12px; border-color: transparent transparent transparent #0a0a0a; margin-left: 2px; }
-  .video-views { font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; color: var(--grey-300); line-height: 1; transition: color 0.2s; }
-  .video-item:hover .video-views { color: var(--yellow); }
-  .video-title { font-size: 0.75rem; color: var(--grey-400); margin-top: 0.2rem; line-height: 1.35; transition: color 0.2s; }
-  .video-item:hover .video-title { color: var(--white); }
-  .video-badge { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.5rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); background: var(--yellow); padding: 0.15rem 0.4rem; margin-top: 0.3rem; align-self: flex-start; }
-  .video-badge.grey { background: var(--grey-300); color: var(--white); }
-  .cs-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06); }
-  .cs-system { background: rgba(240,212,74,0.04); border: 1px solid rgba(240,212,74,0.1); padding: 1.2rem 1.4rem; }
-  .cs-system-label { font-family: 'DM Mono', monospace; font-size: 0.57rem; color: var(--yellow); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.5rem; }
-  .cs-system-text { font-size: 0.83rem; color: var(--grey-400); line-height: 1.65; }
-  .cs-metrics { display: flex; flex-direction: column; justify-content: center; align-items: flex-end; gap: 1.2rem; }
-  .cs-metrics-row { display: flex; gap: 3rem; justify-content: flex-end; }
-  .metric-block { text-align: right; }
-  .metric-value { font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; color: var(--white); line-height: 1; }
-  .metric-value.yellow { color: var(--yellow); }
-  .metric-label { font-family: 'DM Mono', monospace; font-size: 0.57rem; color: var(--grey-400); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 0.2rem; }
+/* proof panel inside teardown */
+.proof-panel{border:1px solid var(--line-strong);background:rgba(255,255,255,0.4);}
+.pp-head{display:flex;justify-content:space-between;padding:0.7rem 1rem;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--graphite);}
+.pp-body{padding:1.6rem 1.2rem;}
+/* big before/after stat block */
+.stat-ba{display:flex;align-items:flex-end;gap:1.4rem;}
+.stat-ba .col{flex:0 0 auto;}
+.stat-ba .v{font-family:var(--display);font-weight:700;font-size:clamp(2.4rem,6vw,4rem);line-height:0.85;}
+.stat-ba .is-before .v{color:var(--before);}
+.stat-ba .is-after .v{color:var(--amber);}
+.stat-ba .v .u{font-size:0.3em;font-family:var(--mono);font-weight:400;}
+.stat-ba .k{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--graphite);margin-top:0.5rem;}
+.stat-ba .mid{flex:1 1 auto;min-width:50px;display:flex;flex-direction:column;align-items:center;gap:0.5rem;padding-bottom:1.2rem;}
+.stat-ba .mid .delta{font-family:var(--mono);font-size:0.62rem;color:var(--ink);background:var(--amber-bright);padding:0.15rem 0.5rem;border-radius:2px;}
+.bars{margin-top:1.6rem;display:flex;flex-direction:column;gap:0.9rem;}
+.bar-row{display:grid;grid-template-columns:64px 1fr;gap:0.8rem;align-items:center;}
+.bar-row .bl{font-family:var(--mono);font-size:0.58rem;color:var(--graphite);text-transform:uppercase;}
+.bar-track{height:14px;background:var(--paper-2);position:relative;overflow:hidden;border:1px solid var(--line);}
+.bar-grow{position:absolute;left:0;top:0;height:100%;width:0;}
+.bar-grow.before{background:var(--before);}
+.bar-grow.after{background:linear-gradient(90deg,var(--amber),var(--amber-bright));}
 
-  /* CATALOG CHANNELS COMPACT GRID */
-  .catalog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 3.5rem; }
-  .catalog-card { border: 1px solid rgba(255,255,255,0.07); padding: 2rem; transition: border-color 0.3s; }
-  .catalog-card:hover { border-color: rgba(240,212,74,0.18); }
-  .catalog-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--white); line-height: 1; margin-bottom: 0.3rem; }
-  .catalog-niche { font-family: 'DM Mono', monospace; font-size: 0.57rem; color: var(--yellow); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
-  .catalog-videos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin-bottom: 1.2rem; }
-  .catalog-video { text-decoration: none; display: flex; flex-direction: column; }
-  .catalog-thumb { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: var(--grey-200); margin-bottom: 0.4rem; }
-  .catalog-thumb > img:not(.gif-preview) { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: opacity 0.25s, transform 0.3s; }
-  .catalog-thumb img.gif-preview { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.35s ease; }
-  .catalog-video:hover .catalog-thumb > img:not(.gif-preview) { opacity: 0; transform: scale(1.04); }
-  .catalog-video:hover .catalog-thumb img.gif-preview { opacity: 1; }
-  .catalog-thumb-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); opacity: 0; transition: opacity 0.2s; }
-  .catalog-video:hover .catalog-thumb-play { opacity: 1; }
-  .catalog-views { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--grey-300); transition: color 0.2s; line-height: 1; }
-  .catalog-video:hover .catalog-views { color: var(--yellow); }
-  .catalog-vid-title { font-size: 0.65rem; color: var(--grey-400); line-height: 1.3; margin-top: 0.15rem; }
-  .catalog-stats { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.06); }
-  .catalog-stat { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--grey-400); letter-spacing: 0.08em; }
-  .catalog-stat span { color: var(--white); font-size: 0.75rem; }
-  .catalog-role { font-size: 0.8rem; color: var(--grey-400); line-height: 1.6; }
-  .play-sm { width: 24px; height: 24px; border-radius: 50%; background: rgba(240,212,74,0.9); display: flex; align-items: center; justify-content: center; }
-  .play-sm::after { content: ''; border-style: solid; border-width: 4px 0 4px 8px; border-color: transparent transparent transparent #0a0a0a; margin-left: 1px; }
+/* media + placeholders */
+.clip{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--ink);border:1px solid var(--line);}
+.clip video,.clip img{width:100%;height:100%;object-fit:cover;display:block;}
+.clip .cap{position:absolute;left:0;bottom:0;right:0;padding:0.5rem 0.7rem;font-family:var(--mono);font-size:0.55rem;letter-spacing:0.08em;text-transform:uppercase;color:#f5f3ec;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent);}
+.media-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.6rem;}
+.placeholder{
+  border:1.5px dashed var(--line-strong);background:repeating-linear-gradient(45deg,transparent,transparent 9px,rgba(26,26,24,0.03) 9px,rgba(26,26,24,0.03) 18px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;
+  aspect-ratio:16/10;padding:1rem;text-align:center;
+}
+.placeholder .ph-tag{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);}
+.placeholder .ph-note{font-family:var(--mono);font-size:0.54rem;color:var(--graphite);max-width:30ch;line-height:1.5;}
+.app-cards{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;}
+.app-card{display:block;border:1px solid var(--line-strong);background:rgba(255,255,255,0.4);padding:1.1rem;transition:border-color .2s,background .2s;}
+.app-card:hover{border-color:var(--amber);background:rgba(203,182,116,0.07);}
+.ac-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.7rem;}
+.ac-name{font-family:var(--display);font-weight:700;font-size:1.4rem;line-height:1;}
+.ac-status{font-family:var(--mono);font-size:0.52rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--amber);}
+.ac-desc{font-size:0.82rem;color:#3a3a36;line-height:1.55;margin-bottom:1rem;}
+.ac-foot{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:0.55rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--graphite);border-top:1px solid var(--line);padding-top:0.7rem;}
+.ac-link{color:var(--amber);}
+@media(max-width:860px){.app-cards{grid-template-columns:1fr;}}
 
-  /* CAPABILITIES */
-  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-  .service-card { border: 1px solid rgba(255,255,255,0.07); padding: 2.5rem; transition: border-color 0.3s; }
-  .service-card:hover { border-color: rgba(240,212,74,0.15); }
-  .service-number { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--grey-400); letter-spacing: 0.2em; margin-bottom: 1.2rem; }
-  .service-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--white); margin-bottom: 1rem; line-height: 1.1; }
-  .service-desc { font-size: 0.83rem; color: var(--grey-400); line-height: 1.7; margin-bottom: 1.5rem; }
-  .service-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+/* ---------- PROOF / ARTIST BAND ---------- */
+.artist-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0.6rem;}
+.artist{position:relative;border:1px solid var(--line);overflow:hidden;background:var(--ink);}
+.artist .clip{border:none;}
+.artist .meta{padding:0.8rem 0.85rem;background:var(--paper);}
+.artist .nm{font-family:var(--display);font-weight:600;font-size:1.02rem;line-height:1;}
+.artist .of{font-family:var(--mono);font-size:0.5rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--amber);margin:0.45rem 0 0.55rem;}
+.artist .sb{font-family:var(--display);font-weight:700;font-size:1.15rem;}
+.artist .sb span{font-family:var(--mono);font-weight:400;font-size:0.5rem;color:var(--graphite);letter-spacing:0.08em;}
+.proof-foot{font-size:0.92rem;color:#3a3a36;margin-top:1.8rem;max-width:60ch;}
+.proof-foot b{color:var(--amber);font-weight:500;}
 
-  /* STACK */
-  .tools-section { background: var(--black); }
-  .tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
-  .tools-group-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--yellow); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem; }
-  .tools-list { display: flex; flex-direction: column; gap: 0.7rem; }
-  .tool-item { font-size: 0.88rem; color: var(--grey-400); padding-left: 1rem; border-left: 1px solid rgba(255,255,255,0.08); transition: color 0.2s, border-color 0.2s; }
-  .tool-item:hover { color: var(--white); border-left-color: var(--yellow); }
+/* ---------- CATALOG ---------- */
+.cat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;}
+.cat-card{border:1px solid var(--line-strong);background:rgba(255,255,255,0.4);overflow:hidden;}
+.cat-clips{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);}
+.cat-clips .clip{border:none;aspect-ratio:1/1;}
+.cat-body{padding:1.3rem 1.3rem 1.5rem;}
+.cat-name{font-family:var(--display);font-weight:700;font-size:1.5rem;line-height:1;}
+.cat-niche{font-family:var(--mono);font-size:0.56rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);margin:0.5rem 0 1rem;}
+.cat-stats{display:flex;gap:1.6rem;flex-wrap:wrap;padding:1rem 0;border-top:1px solid var(--line);margin-bottom:1rem;}
+.cat-stat .cv{font-family:var(--display);font-weight:700;font-size:1.4rem;line-height:1;}
+.cat-stat .cl{font-family:var(--mono);font-size:0.54rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--graphite);margin-top:0.3rem;}
+.cat-role{font-size:0.9rem;color:#3a3a36;}
 
-  /* CONTACT */
-  .contact-section { min-height: 45vh; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
-  .contact-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 80% at 50% 50%, rgba(240,212,74,0.04) 0%, transparent 70%); }
-  .contact-cta { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 8vw, 7.5rem); line-height: 0.9; color: var(--white); margin-bottom: 3rem; position: relative; z-index: 1; }
-  .contact-cta span { color: var(--yellow); }
-  .contact-links { display: flex; gap: 3rem; flex-wrap: wrap; position: relative; z-index: 1; }
-  .contact-link { display: flex; flex-direction: column; gap: 0.3rem; text-decoration: none; }
-  .contact-link-label { font-family: 'DM Mono', monospace; font-size: 0.57rem; color: var(--grey-400); letter-spacing: 0.2em; text-transform: uppercase; }
-  .contact-link-value { font-size: 0.92rem; color: var(--white); transition: color 0.2s; }
-  .contact-link:hover .contact-link-value { color: var(--yellow); }
+/* ---------- CAPABILITIES + STACK ---------- */
+.cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+.cap{background:var(--paper);padding:2rem 1.6rem;}
+.cap .cn{font-family:var(--mono);font-size:0.62rem;color:var(--amber);letter-spacing:0.1em;margin-bottom:1rem;}
+.cap h4{font-family:var(--display);font-weight:600;font-size:1.25rem;line-height:1.1;margin-bottom:0.9rem;}
+.cap p{font-size:0.9rem;color:#3a3a36;}
+.stack{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem;margin-top:3rem;}
+.stack .sg{font-family:var(--mono);font-size:0.62rem;color:var(--amber);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:1rem;}
+.stack ul{list-style:none;display:flex;flex-direction:column;gap:0.55rem;}
+.stack li{font-size:0.9rem;color:#3a3a36;padding-left:0.9rem;border-left:1px solid var(--line-strong);}
 
-  footer { padding: 2rem 4rem; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; }
-  .footer-name { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--grey-400); letter-spacing: 0.12em; text-transform: uppercase; }
-  .footer-copy { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--grey-300); }
+/* ---------- CONTACT ---------- */
+.contact{text-align:left;}
+.contact h2{font-family:var(--display);font-weight:700;font-size:clamp(2.6rem,8vw,6.5rem);line-height:0.95;letter-spacing:-0.03em;}
+.contact h2 em{font-style:normal;color:var(--amber);}
+.c-links{display:flex;flex-wrap:wrap;gap:2.5rem;margin-top:2.8rem;}
+.c-link .cl-lbl{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--graphite);margin-bottom:0.35rem;}
+.c-link .cl-val{font-size:1.02rem;border-bottom:1px solid var(--line-strong);padding-bottom:0.25rem;transition:border-color .2s,color .2s;}
+.c-link:hover .cl-val{color:var(--amber);border-color:var(--amber);}
 
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+footer{padding:2rem var(--pad);border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;}
+.footer-n{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--graphite);}
 
-  .wrap { margin: 0 4rem 2px; }
-  .wrap-last { margin: 0 4rem 4rem; }
+/* reveal */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);}
+.reveal.in{opacity:1;transform:none;}
 
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    nav { padding: 1.2rem 2rem; }
-    .nav-links { gap: 1.3rem; }
-    section { padding: 5rem 2rem; }
-    .hero { padding: 0 2rem 4rem; }
-    .hero-stats { gap: 2rem; }
-    .eng-card { grid-template-columns: 1fr; gap: 2rem; padding: 2rem; }
-    .eng-side { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1.6rem; flex-direction: row; flex-wrap: wrap; gap: 2rem; }
-    .case-study { margin: 0 2rem 2px; padding: 2rem; }
-    .cs-videos { grid-template-columns: repeat(3, 1fr); gap: 0.7rem; }
-    .cs-bottom { grid-template-columns: 1fr; gap: 1.5rem; }
-    .cs-metrics { align-items: flex-start; }
-    .cs-metrics-row { justify-content: flex-start; }
-    .catalog-grid { grid-template-columns: repeat(2, 1fr); }
-    .services-grid { grid-template-columns: repeat(2, 1fr); }
-    .tools-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .wrap { margin: 0 2rem 2px; }
-    .wrap-last { margin: 0 2rem 4rem; }
-  }
-
-  @media (max-width: 600px) {
-    nav { padding: 1rem 1.2rem; flex-wrap: wrap; gap: 0.5rem; }
-    .nav-links { gap: 0.8rem; }
-    .nav-links a { font-size: 0.58rem; letter-spacing: 0.06em; }
-    section { padding: 4rem 1.2rem; }
-    .hero { padding: 0 1.2rem 3.5rem; }
-    .hero-name { font-size: clamp(3.5rem, 16vw, 6rem); }
-    .hero-title { font-size: 1rem; }
-    .hero-stats { gap: 1.5rem; }
-    .hero-stat-number { font-size: 1.9rem; }
-    .hero-scroll { display: none; }
-    .section-title { font-size: clamp(2.2rem, 9vw, 3.5rem); }
-    .eng-card { margin: 0; }
-    .case-study { margin: 0 0 2px; padding: 1.5rem; }
-    .cs-channel { font-size: 2rem; }
-    .cs-videos { grid-template-columns: 1fr; gap: 1rem; }
-    .cs-bottom { grid-template-columns: 1fr; }
-    .cs-metrics-row { flex-wrap: wrap; gap: 1.5rem; }
-    .metric-value { font-size: 2.2rem; }
-    .catalog-grid { grid-template-columns: 1fr; }
-    .services-grid { grid-template-columns: 1fr; }
-    .contact-cta { font-size: clamp(2.5rem, 10vw, 4rem); }
-    .contact-links { gap: 2rem; }
-    footer { padding: 1.5rem 1.2rem; flex-direction: column; gap: 0.5rem; text-align: center; }
-    .wrap { margin: 0 0 2px; }
-    .wrap-last { margin: 0 0 3rem; }
-  }
+@media(max-width:860px){
+  .td-grid{grid-template-columns:1fr;gap:2rem;}
+  .artist-grid{grid-template-columns:repeat(2,1fr);}
+  .cat-grid{grid-template-columns:1fr;}
+  .cap-grid{grid-template-columns:1fr;}
+  .stack{grid-template-columns:1fr;gap:2rem;}
+}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+  *{animation:none!important;}
+}
 </style>
 </head>
 <body>
+<div class="wrap">
 
 <nav>
-  <a href="#" class="nav-logo">Hugo <span>Martin</span></a>
-  <ul class="nav-links">
-    <li><a href="#systems">Systems</a></li>
-    <li><a href="#impact">Impact</a></li>
-    <li><a href="#capabilities">What I Do</a></li>
-    <li><a href="#stack">Stack</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+  <a href="#top" class="logo">Hugo Martín<span class="dot">.</span></a>
+  <div class="nav-links">
+    <a href="#systems">Systems</a>
+    <a href="#proof">Proof</a>
+    <a href="#catalog">Catalog</a>
+    <a href="#stack">Stack</a>
+  </div>
+  <a href="#contact" class="nav-cta">Get in touch</a>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-counter">Creative Technologist &amp; Creative Operations Lead — Bogotá, Colombia · Remote</div>
-  <h1 class="hero-name">Hugo<br><span class="last">Martin</span></h1>
-  <p class="hero-title">I <b>build and lead the creative systems</b> behind content viewed <b>90M+ times</b>. I founded and led a creative department, and build the automation, AI tooling, and software (AI-assisted) that lets a small team ship <b>40+ videos a week</b>.</p>
-  <div class="hero-stats">
-    <div>
-      <div class="hero-stat-number yellow">90M+</div>
-      <div class="hero-stat-label">Views Driven by My Systems</div>
-    </div>
-    <div>
-      <div class="hero-stat-number">4</div>
-      <div class="hero-stat-label">Production Apps &amp; Pipelines Built</div>
-    </div>
-    <div>
-      <div class="hero-stat-number yellow">1</div>
-      <div class="hero-stat-label">App Live on the App Store</div>
-    </div>
-    <div>
-      <div class="hero-stat-number">40+</div>
-      <div class="hero-stat-label">Videos / Week Across My Systems</div>
+<header class="hero" id="top">
+  <div class="eyebrow"><span class="tick"></span>Creative Technologist / Creative Operations Lead — Bogotá · Remote</div>
+  <h1>I find the bottleneck, design the system, and let the <em>output prove it.</em></h1>
+  <p class="hero-sub">I build and lead creative operations across <b>~50 YouTube channels</b> viewed <b>90M+ times</b> — and I build the software that lets a small team move at that scale. The diagnosis and the design are mine; AI is how I execute them.</p>
+
+  <div class="signature reveal">
+    <div class="sig-head"><span>// Signature result — Ten2Media production</span><span>real, defensible</span></div>
+    <div class="sig-body">
+      <div class="ba-row">
+        <div class="ba-item is-before">
+          <div class="v" data-count="10">0<span class="u"> /wk</span></div>
+          <div class="k">Before · 10 videos in ~8 hrs</div>
+        </div>
+        <div class="ba-arrow">
+          <div class="delta">4× output · ⅓ the time</div>
+          <div class="ba-track"><div class="ba-fill" data-fill="100"></div></div>
+          <div class="k" style="font-family:var(--mono);font-size:0.55rem;color:var(--graphite);">~48 min/video → under 5</div>
+        </div>
+        <div class="ba-item is-after">
+          <div class="v" data-count="40">0<span class="u"> /wk</span></div>
+          <div class="k">After · 40 videos in ~3 hrs</div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="hero-scroll">Scroll</div>
+
+  <div class="scroll-cue"><span class="bar"></span>Scroll — four bottlenecks, four systems</div>
+</header>
+
+<!-- SYSTEMS / TEARDOWNS -->
+<section id="systems">
+  <div class="sec-head reveal">
+    <div class="sec-label">The work</div>
+    <h2 class="sec-title">Four bottlenecks I diagnosed — and the systems I built to kill them.</h2>
+    <p class="sec-intro">Each one started as a real constraint in production. I figured out what the system needed to do, designed it, and built it (AI-assisted). The numbers are the receipts.</p>
+  </div>
+
+  <!-- TD 1 -->
+  <div class="teardown reveal">
+    <div class="td-top"><span class="num">01 / 04</span><span>Production throughput</span></div>
+    <div class="td-grid">
+      <div class="td-narrative">
+        <div class="td-label">The bottleneck</div>
+        <h3>A small team capped at ~10 videos a week — and most of the day was spent assembling, not creating.</h3>
+        <div class="td-label">The system</div>
+        <p class="td-system">I designed the operating system for content production across ~50 channels — <b>standardized briefs, batch workflows, reusable template architecture, and the automation under it</b> — so output scales without the team (or the quality) breaking.</p>
+        <div class="td-tags"><span class="tag">SOP & systems design</span><span class="tag">Batch workflows</span><span class="tag">Template architecture</span></div>
+      </div>
+      <div class="proof-panel reveal">
+        <div class="pp-head"><span>// throughput</span><span>per week</span></div>
+        <div class="pp-body">
+          <div class="stat-ba">
+            <div class="col is-before"><div class="v" data-count="10">0</div><div class="k">videos / wk · before</div></div>
+            <div class="mid"><div class="delta">+300%</div></div>
+            <div class="col is-after"><div class="v" data-count="40">0<span class="u">+</span></div><div class="k">videos / wk · now</div></div>
+          </div>
+          <div class="bars">
+            <div class="bar-row"><span class="bl">Before</span><div class="bar-track"><div class="bar-grow before" data-w="25"></div></div></div>
+            <div class="bar-row"><span class="bl">Now</span><div class="bar-track"><div class="bar-grow after" data-w="100"></div></div></div>
+          </div>
+          <div style="font-family:var(--mono);font-size:0.6rem;color:var(--graphite);margin-top:1.1rem;line-height:1.6;">Batch time for the full set: <b style="color:var(--ink)">~8 hrs → ~3 hrs</b>, export included.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TD 2 -->
+  <div class="teardown reveal">
+    <div class="td-top"><span class="num">02 / 04</span><span>Thumbnails at scale</span></div>
+    <div class="td-grid">
+      <div class="td-narrative">
+        <div class="td-label">The bottleneck</div>
+        <h3>Every thumbnail was a hand-built one-off — the slowest, least scalable step in the channel.</h3>
+        <div class="td-label">The system</div>
+        <p class="td-system">I built a <b>templatized, scalable thumbnail system</b>. The design architecture and visual judgment stay human — that's the part that matters. <b>AI does the heavy lifting</b>: filling placeholders, sourcing and fetching images, upscaling, background work. The result: consistent, on-brand thumbnails at a fraction of the time.</p>
+        <div class="td-tags"><span class="tag">Human design system</span><span class="tag">AI-assisted production</span><span class="tag">Image search · upscale</span><span class="tag">Custom-trained model</span></div>
+      </div>
+      <div class="proof-panel reveal">
+        <div class="pp-head"><span>// time per thumbnail</span><span>−90%</span></div>
+        <div class="pp-body">
+          <div class="stat-ba">
+            <div class="col is-before"><div class="v" data-count="100">0<span class="u">%</span></div><div class="k">manual effort · before</div></div>
+            <div class="mid"><div class="delta">−90%</div></div>
+            <div class="col is-after"><div class="v" data-count="10">0<span class="u">%</span></div><div class="k">with the system</div></div>
+          </div>
+          <div class="media-grid" style="margin-top:1.5rem;">
+            <div class="clip"><img src="assets/thumbs/t1.jpg" alt="Thumbnail system output — soft r&b" loading="lazy"></div>
+            <div class="clip"><img src="assets/thumbs/t2.jpg" alt="Thumbnail system output — long drive r&b" loading="lazy"></div>
+            <div class="clip"><img src="assets/thumbs/t3.jpg" alt="Thumbnail system output — toxic love r&b" loading="lazy"></div>
+            <div class="clip"><img src="assets/thumbs/t4.jpg" alt="Thumbnail system output — relaxing r&b" loading="lazy"></div>
+          </div>
+          <div style="font-family:var(--mono);font-size:0.6rem;color:var(--graphite);margin-top:1.1rem;line-height:1.6;">On Lost Kids, a model trained on the artist's likeness powers ~⅓ of top-40 videos — <b style="color:var(--ink)">3.24M views</b> on AI-assisted thumbnails.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TD 3 -->
+  <div class="teardown reveal">
+    <div class="td-top"><span class="num">03 / 04</span><span>Compilation assembly</span></div>
+    <div class="td-grid">
+      <div class="td-narrative">
+        <div class="td-label">The bottleneck</div>
+        <h3>Multi-track compilations meant hours of manual assembly per video — pure repetitive labor.</h3>
+        <div class="td-label">The system</div>
+        <p class="td-system">I built a <b>browser-automation + API pipeline</b> that assembles compilations end to end, unattended. One run produced <b>21 multi-track compilations — 240+ tracks — in 59 minutes</b>, no hands on keyboard.</p>
+        <div class="td-tags"><span class="tag">Browser automation</span><span class="tag">API orchestration</span><span class="tag">Unattended pipeline</span></div>
+      </div>
+      <div class="proof-panel reveal">
+        <div class="pp-head"><span>// one unattended run</span><span>59 min</span></div>
+        <div class="pp-body">
+          <div class="stat-ba">
+            <div class="col is-after"><div class="v" data-count="21">0</div><div class="k">compilations</div></div>
+            <div class="mid"><div class="delta">240+ tracks</div></div>
+            <div class="col is-after"><div class="v" data-count="59">0<span class="u"> min</span></div><div class="k">hands-off</div></div>
+          </div>
+          <div class="media-grid" style="margin-top:1.5rem;">
+            <div class="clip"><video data-vid="dean_1" muted loop playsinline preload="none" poster="assets/poster/dean_1.jpg"></video><span class="cap">Dean Martin — compilation w/ tracklist</span></div>
+            <div class="clip"><video data-vid="frank_2" muted loop playsinline preload="none" poster="assets/poster/frank_2.jpg"></video><span class="cap">Frank Sinatra — catalog comp</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TD 4 -->
+  <div class="teardown reveal">
+    <div class="td-top"><span class="num">04 / 04</span><span>Software I built — Liner & Weave</span></div>
+    <div class="td-grid">
+      <div class="td-narrative">
+        <div class="td-label">The bottleneck</div>
+        <h3>When no tool existed for the volume I needed, buying or hiring wouldn't fix it. So I built the tool.</h3>
+        <div class="td-label">The system</div>
+        <p class="td-system"><b>Liner</b> — a macOS app that isolates vocals, transcribes, syncs lyrics to word-level timing, and renders 4K. A 1-hr render dropped from 20+ min to 3–5; it ships <b>10+ lyric videos/week</b>. <b>Weave</b> — a local AI-agent editor that turns a 2-hr recording into a finished cut, saving <b>~6 hrs of manual editing per video</b>.</p>
+        <div class="td-tags"><span class="tag">macOS app</span><span class="tag">FFmpeg · ML</span><span class="tag">AI-agent editor</span><span class="tag">Shipped to production</span></div>
+      </div>
+      <div class="proof-panel reveal">
+        <div class="pp-head"><span>// Liner — what it ships</span><span>10+/wk</span></div>
+        <div class="pp-body">
+          <div class="media-grid">
+            <div class="clip"><video data-vid="linda_1" muted loop playsinline preload="none" poster="assets/poster/linda_1.jpg"></video><span class="cap">Lyric video — Liner output</span></div>
+            <div class="clip"><video data-vid="bigx_alltheway" muted loop playsinline preload="none" poster="assets/poster/bigx_alltheway.jpg"></video><span class="cap">Word-level lyric sync</span></div>
+          </div>
+          <div class="bars" style="margin-top:1.5rem;">
+            <div class="bar-row"><span class="bl">1h render before</span><div class="bar-track"><div class="bar-grow before" data-w="100"></div></div></div>
+            <div class="bar-row"><span class="bl">with Liner</span><div class="bar-track"><div class="bar-grow after" data-w="20"></div></div></div>
+          </div>
+          <div class="app-cards" style="margin-top:1.2rem;">
+            <a class="app-card" href="https://github.com/cbadelhugo/liner" target="_blank" rel="noopener">
+              <div class="ac-top"><span class="ac-name">Liner</span><span class="ac-status">● in production</span></div>
+              <p class="ac-desc">macOS production engine — vocal isolation, Whisper transcription, word-level lyric sync, 4K FFmpeg render.</p>
+              <div class="ac-foot"><span>Python · FFmpeg · ML</span><span class="ac-link">GitHub ↗</span></div>
+            </a>
+            <a class="app-card" href="https://github.com/cbadelhugo/weave" target="_blank" rel="noopener">
+              <div class="ac-top"><span class="ac-name">Weave</span><span class="ac-status">● in production</span></div>
+              <p class="ac-desc">Local AI-agent editor — auto-transcribe, cut filler, find the narrative hook, render or export to Premiere.</p>
+              <div class="ac-foot"><span>Python · LLM · FFmpeg</span><span class="ac-link">GitHub ↗</span></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<div class="divider"></div>
+<div class="rule"></div>
 
-<!-- SYSTEMS & ENGINEERING -->
-<section id="systems" style="padding-bottom: 2rem;">
-  <div class="section-label">Tools &amp; Software I've Built</div>
-  <h2 class="section-title">I Build My<br>Own Tools</h2>
-  <p class="section-sub">I'd rather build a tool that fits the problem than bend my workflow to someone else's. Every one of these started as a real bottleneck in my own work — I figured out what the tool needed to do and built it with AI coding tools.</p>
+<!-- PROOF -->
+<section id="proof">
+  <div class="sec-head reveal">
+    <div class="sec-label">Proof of impact</div>
+    <h2 class="sec-title">90M+ views of real output.</h2>
+    <p class="sec-intro">The systems don't run in a vacuum — they produce for official artist channels with millions of followers. Content I produced and directed.</p>
+  </div>
+  <div class="artist-grid reveal">
+    <div class="artist"><div class="clip"><video data-vid="frank_1" muted loop playsinline preload="none" poster="assets/poster/frank_1.jpg"></video></div><div class="meta"><div class="nm">Frank Sinatra</div><div class="of">Official Artist Channel</div><div class="sb">2.9M <span>subs</span></div></div></div>
+    <div class="artist"><div class="clip"><video data-vid="bigx_therapy" muted loop playsinline preload="none" poster="assets/poster/bigx_therapy.jpg"></video></div><div class="meta"><div class="nm">BigXthaPlug</div><div class="of">Official · 10M-view lyric video</div><div class="sb">1.7M <span>subs</span></div></div></div>
+    <div class="artist"><div class="clip"><video data-vid="brent_1" muted loop playsinline preload="none" poster="assets/poster/brent_1.jpg"></video></div><div class="meta"><div class="nm">Brent Faiyaz</div><div class="of">Official Artist Channel</div><div class="sb">1.95M <span>subs</span></div></div></div>
+    <div class="artist"><div class="clip"><video data-vid="linda_1" muted loop playsinline preload="none" poster="assets/poster/linda_1.jpg"></video></div><div class="meta"><div class="nm">Linda Ronstadt</div><div class="of">Official Artist Channel</div><div class="sb">353K <span>subs</span></div></div></div>
+    <div class="artist"><div class="clip"><video data-vid="dean_2" muted loop playsinline preload="none" poster="assets/poster/dean_2.jpg"></video></div><div class="meta"><div class="nm">Dean Martin</div><div class="of">Official Artist Channel</div><div class="sb">334K <span>subs</span></div></div></div>
+  </div>
+  <p class="proof-foot reveal">Lyric videos, compilations, and visual systems I produced and directed for these official channels — <b>90M+ combined views</b>, including a single lyric video past 10M.</p>
 </section>
 
-<div class="eng-grid" style="margin: 0 4rem 4rem;">
+<div class="rule"></div>
 
-  <!-- ENG 1: PUZZLR -->
-  <div class="eng-card">
-    <div>
-      <div class="eng-number">01 / 05</div>
-      <div class="eng-name">Puzzlr</div>
-      <div class="eng-tagline">iOS + Android App · Built &amp; Shipped Solo</div>
-      <p class="eng-desc">A cross-platform mobile app for jigsaw-puzzle collectors — track your collection, time builds, and capture boxes with the camera. I <b>owned it end-to-end</b> (AI-assisted): scoped the product, designed every screen, and shipped it to the App Store. It reads puzzle boxes with on-device text recognition, syncs between phone and web, and runs a subscription paywall.</p>
-      <div class="eng-tags">
-        <span class="tag">iOS + Android</span>
-        <span class="tag">On-Device OCR</span>
-        <span class="tag">In-App Subscriptions</span>
-        <span class="tag">Cloud Sync</span>
-        <span class="tag">Built with AI Tools</span>
-        <span class="tag">App Store</span>
-      </div>
-    </div>
-    <div class="eng-side">
-      <span class="eng-status">Live on the App Store</span>
-      <div>
-        <div class="eng-metric-value yellow">19</div>
-        <div class="eng-metric-label">Screens Shipped</div>
-      </div>
-      <div>
-        <div class="eng-metric-value">iOS+Android</div>
-        <div class="eng-metric-label">One App + 6-Language Landing</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ENG 2: LINER -->
-  <div class="eng-card">
-    <div>
-      <div class="eng-number">02 / 05</div>
-      <div class="eng-name">Liner</div>
-      <div class="eng-tagline">Desktop Video-Production Engine · ML + FFmpeg</div>
-      <p class="eng-desc">A macOS app I built to make <b>10+ lyric videos a week</b> possible — a volume not achievable by hand. It automatically isolates vocals, transcribes the audio, and syncs official lyrics to word-level timing, then renders 4K video — cutting a 1-hour render from 20+ minutes to 3–5. <b>I designed what it needed to do and assembled it with AI coding tools</b>; it's run in production for 90+ videos.</p>
-      <div class="eng-tags">
-        <span class="tag">Audio Transcription</span>
-        <span class="tag">Vocal Isolation</span>
-        <span class="tag">Lyric Sync</span>
-        <span class="tag">4K Render · FFmpeg</span>
-        <span class="tag">Built with AI Tools</span>
-      </div>
-    </div>
-    <div class="eng-side">
-      <span class="eng-status">In Production</span>
-      <a href="https://github.com/cbadelhugo/liner" target="_blank" class="eng-repo">View on GitHub →</a>
-      <div>
-        <div class="eng-metric-value yellow">90+</div>
-        <div class="eng-metric-label">Videos Produced</div>
-      </div>
-      <div>
-        <div class="eng-metric-value">10+/wk</div>
-        <div class="eng-metric-label">Sustained Output</div>
-      </div>
-      <div>
-        <div class="eng-metric-value">4–6×</div>
-        <div class="eng-metric-label">Faster Render</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ENG 3: WEAVE -->
-  <div class="eng-card">
-    <div>
-      <div class="eng-number">03 / 05</div>
-      <div class="eng-name">Weave</div>
-      <div class="eng-tagline">AI-Agent Video Editor · Local-First · Python + LLM</div>
-      <p class="eng-desc">A local-first editor that turns a raw 2-hour Zoom recording into a finished, branded video — automatically. It transcribes the recording, cuts dead air, filler words, and false starts, and uses <b>AI to find the strongest narrative hook</b> and reorder for it — every decision auditable and reversible. Renders 4K (a 2-hour video in ~20 min) and exports an MP4 or a Premiere project. <b>In production: 3+ videos/week</b> for a coaching brand, cutting ~6 hours of manual editing per video.</p>
-      <div class="eng-tags">
-        <span class="tag">Auto-Transcription</span>
-        <span class="tag">Smart Cut Detection</span>
-        <span class="tag">AI Narrative Hook</span>
-        <span class="tag">4K Render</span>
-        <span class="tag">Premiere Export</span>
-        <span class="tag">Built with AI Tools</span>
-      </div>
-    </div>
-    <div class="eng-side">
-      <span class="eng-status">In Production</span>
-      <a href="https://github.com/cbadelhugo/weave" target="_blank" class="eng-repo">View source on GitHub →</a>
-      <div>
-        <div class="eng-metric-value yellow">~6 hrs</div>
-        <div class="eng-metric-label">Manual Editing Saved / Video</div>
-      </div>
-      <div>
-        <div class="eng-metric-value">46%</div>
-        <div class="eng-metric-label">Runtime Auto-Trimmed (2h → 1h)</div>
-      </div>
-      <div>
-        <div class="eng-metric-value">Local</div>
-        <div class="eng-metric-label">Runs Private, Cloud-Free</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ENG 4: CONTENT AUTOMATION SUITE -->
-  <div class="eng-card">
-    <div>
-      <div class="eng-number">04 / 05</div>
-      <div class="eng-name">Content Automation Suite</div>
-      <div class="eng-tagline">~15 Internal Tools · Web Apps + Pipelines</div>
-      <p class="eng-desc">A suite of internal tools I built (AI-assisted) to run content production across <b>~50 YouTube channels</b>. Highlights: a browser-automation pipeline that created <b>21 multi-track compilations (240+ tracks) in a single unattended 59-minute run</b>; a photo-sourcing app that pulls images from multiple sources; a computer-vision tool that scans 10–15-hour concerts and auto-applies blur for moderation; and batch AI image generation and upscaling. Each system documented with handoff specs so a team can operate it.</p>
-      <div class="eng-tags">
-        <span class="tag">Browser Automation</span>
-        <span class="tag">Computer-Vision Moderation</span>
-        <span class="tag">AI Image Generation</span>
-        <span class="tag">Multi-API Orchestration</span>
-        <span class="tag">Built with AI Tools</span>
-      </div>
-    </div>
-    <div class="eng-side">
-      <span class="eng-status grey">Internal · In Use</span>
-      <div>
-        <div class="eng-metric-value yellow">~50</div>
-        <div class="eng-metric-label">Channels Powered</div>
-      </div>
-      <div>
-        <div class="eng-metric-value">21 / 59min</div>
-        <div class="eng-metric-label">Compilations, One Unattended Run</div>
-      </div>
-      <div>
-        <div class="eng-metric-value">10K+</div>
-        <div class="eng-metric-label">Images Auto-Organized</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ENG 5: PRODUCTION AUTOMATION -->
-  <div class="eng-card">
-    <div>
-      <div class="eng-number">05 / 05</div>
-      <div class="eng-name">Production Automation</div>
-      <div class="eng-tagline">Adobe Extensions · Programmatic Brand Systems</div>
-      <p class="eng-desc">Automation that lives inside the creative tools themselves. I built an <b>Adobe Premiere panel</b> that batch-applies edits from timecodes — turning a 1-hour live recording into a finished cut in a single pass. For freelance music clients I built tools (AI-assisted) that generate brand identities, thumbnails, and lyric-video projects automatically, matching audio to lyrics and laying out typography adaptively.</p>
-      <div class="eng-tags">
-        <span class="tag">Adobe Premiere Panel</span>
-        <span class="tag">Batch Automation</span>
-        <span class="tag">Generative Brand Systems</span>
-        <span class="tag">Built with AI Tools</span>
-      </div>
-    </div>
-    <div class="eng-side">
-      <span class="eng-status grey">Freelance · Billed</span>
-      <div>
-        <div class="eng-metric-value yellow">1-Pass</div>
-        <div class="eng-metric-label">1-hr Recording → Finished Cut</div>
-      </div>
-      <div>
-        <div class="eng-metric-value">4</div>
-        <div class="eng-metric-label">Channels Run Single-Handed</div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<div class="divider"></div>
-
-<!-- IMPACT / CREATIVE TRACK RECORD -->
-<section id="impact" style="padding-bottom: 2rem;">
-  <div class="section-label">Proof of Impact — Creative Track Record</div>
-  <h2 class="section-title">90M+ Views<br>of Real Output</h2>
-  <p class="section-sub">The systems above don't run in a vacuum — they produce content for official artist channels and music catalogs with millions of followers. This is the measurable, real-world impact behind the systems: content I produced and directed, viewed tens of millions of times.</p>
-</section>
-
-<!-- OFFICIAL ARTIST CHANNELS — compact proof band -->
-<div style="margin: 0 4rem 4rem;">
-  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:2px;">
-    <div style="border:1px solid rgba(255,255,255,0.07); padding:1.6rem 1.4rem;">
-      <div style="font-family:'Bebas Neue',sans-serif; font-size:1.7rem; color:var(--white); line-height:1;">Frank Sinatra</div>
-      <div style="font-family:'DM Mono',monospace; font-size:0.52rem; color:var(--yellow); letter-spacing:0.1em; text-transform:uppercase; margin:0.55rem 0 0.9rem;">Official Artist Channel</div>
-      <div style="font-family:'Bebas Neue',sans-serif; font-size:1.6rem; color:var(--white); line-height:1;">2.9M <span style="font-family:'DM Mono',monospace; font-size:0.5rem; color:var(--grey-400); letter-spacing:0.1em;">SUBS</span></div>
-    </div>
-    <div style="border:1px solid rgba(255,255,255,0.07); padding:1.6rem 1.4rem;">
-      <div style="font-family:'Bebas Neue',sans-serif; font-size:1.7rem; color:var(--white); line-height:1;">BigXthaPlug</div>
-      <div style="font-family:'DM Mono',monospace; font-size:0.52rem; color:var(--yellow); letter-spacing:0.1em; text-transform:uppercase; margin:0.55rem 0 0.9rem;">Official · 10M-View Lyric Video</div>
-      <div style="font-family:'Bebas Neue',sans-serif; font-size:1.6rem; color:var(--white); line-height:1;">1.7M <span style="font-family:'DM Mono',monospace; font-size:0.5rem; color:var(--grey-400); letter-spacing:0.1em;">SUBS</span></div>
-    </div>
-    <div style="border:1px solid rgba(255,255,255,0.07); padding:1.6rem 1.4rem;">
-      <div style="font-family:'Bebas Neue',sans-serif; font-size:1.7rem; color:var(--white); line-height:1;">Brent Faiyaz</div>
-      <div style="font-family:'DM Mono',monospace; font-size:0.52rem; color:var(--yellow); letter-spacing:0.1em; text-transform:uppercase; margin:0.55rem 0 0.9rem;">Official Artist Channel</div>
-      <div style="font-family:'Bebas Neue',sans-serif; font-size:1.6rem; color:var(--white); line-height:1;">1.95M <span style="font-family:'DM Mono',monospace; font-size:0.5rem; color:var(--grey-400); letter-spacing:0.1em;">SUBS</span></div>
-    </div>
-    <div style="border:1px solid rgba(255,255,255,0.07); padding:1.6rem 1.4rem;">
-      <div style="font-family:'Bebas Neue',sans-serif; font-size:1.7rem; color:var(--white); line-height:1;">Linda Ronstadt</div>
-      <div style="font-family:'DM Mono',monospace; font-size:0.52rem; color:var(--yellow); letter-spacing:0.1em; text-transform:uppercase; margin:0.55rem 0 0.9rem;">Official Artist Channel</div>
-      <div style="font-family:'Bebas Neue',sans-serif; font-size:1.6rem; color:var(--white); line-height:1;">353K <span style="font-family:'DM Mono',monospace; font-size:0.5rem; color:var(--grey-400); letter-spacing:0.1em;">SUBS</span></div>
-    </div>
-    <div style="border:1px solid rgba(255,255,255,0.07); padding:1.6rem 1.4rem;">
-      <div style="font-family:'Bebas Neue',sans-serif; font-size:1.7rem; color:var(--white); line-height:1;">Dean Martin</div>
-      <div style="font-family:'DM Mono',monospace; font-size:0.52rem; color:var(--yellow); letter-spacing:0.1em; text-transform:uppercase; margin:0.55rem 0 0.9rem;">Official Artist Channel</div>
-      <div style="font-family:'Bebas Neue',sans-serif; font-size:1.6rem; color:var(--white); line-height:1;">334K <span style="font-family:'DM Mono',monospace; font-size:0.5rem; color:var(--grey-400); letter-spacing:0.1em;">SUBS</span></div>
-    </div>
-  </div>
-  <p style="font-size:0.85rem; color:var(--grey-400); margin-top:1.5rem; max-width:640px; line-height:1.65;">Lyric videos, compilations, and visual systems I produced and directed for these official artist channels &mdash; <b style="color:var(--yellow); font-weight:400;">90M+ combined views</b>, including a single lyric video past 10M.</p>
-</div>
-
-<div class="divider"></div>
-
-<!-- CATALOG CHANNELS -->
+<!-- CATALOG -->
 <section id="catalog">
-  <div class="section-label">Catalog Channels — Systems That Scale</div>
-  <h2 class="section-title">Built to<br>Run at Volume</h2>
-  <p class="section-sub">Music catalog channels where I designed the full production system — reusable template architecture, AI thumbnail pipelines, and channel identity built to run at volume. Each one is a system, not a one-off.</p>
-  <div class="catalog-grid">
+  <div class="sec-head reveal">
+    <div class="sec-label">Catalog systems</div>
+    <h2 class="sec-title">Built to run at volume — each channel is a system, not a one-off.</h2>
+    <p class="sec-intro">Music catalog channels where I designed the full production system: reusable templates, AI thumbnail pipelines, and a channel identity that scales.</p>
+  </div>
+  <div class="cat-grid reveal">
 
-    <div class="catalog-card">
-      <div class="catalog-name">Lost Kids</div>
-      <div class="catalog-niche">Brent Faiyaz · R&amp;B · Soul</div>
-      <div class="catalog-stats">
-        <div class="catalog-stat">Subscribers — <span>76.7K</span></div>
-        <div class="catalog-stat">AI Thumbnail Views — <span>3.24M</span></div>
+    <div class="cat-card">
+      <div class="cat-clips">
+        <div class="clip"><video data-vid="lost_kids_1" muted loop playsinline preload="none" poster="assets/poster/lost_kids_1.jpg"></video></div>
+        <div class="clip"><video data-vid="lost_kids_2" muted loop playsinline preload="none" poster="assets/poster/lost_kids_2.jpg"></video></div>
+        <div class="clip"><video data-vid="lost_kids_3" muted loop playsinline preload="none" poster="assets/poster/lost_kids_3.jpg"></video></div>
       </div>
-      <p class="catalog-role">Designed the visual system, AI thumbnail pipeline, lyric videos, and mix compilations. Trained a custom AI model on the artist's likeness to generate unlimited context-specific images — ~⅓ of top 40 videos run on AI thumbnails.</p>
+      <div class="cat-body">
+        <div class="cat-name">Lost Kids</div>
+        <div class="cat-niche">Brent Faiyaz · R&B · Soul</div>
+        <div class="cat-stats">
+          <div class="cat-stat"><div class="cv">76.7K</div><div class="cl">subscribers</div></div>
+          <div class="cat-stat"><div class="cv">3.24M</div><div class="cl">AI-thumb views</div></div>
+        </div>
+        <p class="cat-role">Designed the visual system and AI thumbnail pipeline — a model trained on the artist's likeness generates context-specific images. ~⅓ of top-40 videos run on it.</p>
+      </div>
     </div>
 
-    <div class="catalog-card">
-      <div class="catalog-name">TheDoorsHQ</div>
-      <div class="catalog-niche">The Doors · Classic Rock · Psychedelic</div>
-      <div class="catalog-stats">
-        <div class="catalog-stat">Subscribers — <span>5.84K</span></div>
-        <div class="catalog-stat">Total Views — <span>2.41M</span></div>
-        <div class="catalog-stat">To Monetization — <span>8 days</span></div>
+    <div class="cat-card">
+      <div class="cat-clips">
+        <div class="clip"><video data-vid="doors_1" muted loop playsinline preload="none" poster="assets/poster/doors_1.jpg"></video></div>
+        <div class="clip"><video data-vid="doors_2" muted loop playsinline preload="none" poster="assets/poster/doors_2.jpg"></video></div>
+        <div class="clip"><video data-vid="doors_3" muted loop playsinline preload="none" poster="assets/poster/doors_3.jpg"></video></div>
       </div>
-      <p class="catalog-role">Full creative ownership — channel identity, visual system, lyric videos, and playlist compilations. Reached YouTube's monetization threshold in 8 days from launch.</p>
+      <div class="cat-body">
+        <div class="cat-name">TheDoorsHQ</div>
+        <div class="cat-niche">The Doors · Classic Rock · Psychedelic</div>
+        <div class="cat-stats">
+          <div class="cat-stat"><div class="cv">2.41M</div><div class="cl">total views</div></div>
+          <div class="cat-stat"><div class="cv">8 days</div><div class="cl">to monetization</div></div>
+        </div>
+        <p class="cat-role">Full creative ownership — identity, visual system, lyric videos, compilations. Hit YouTube's monetization threshold 8 days from launch.</p>
+      </div>
     </div>
 
-    <div class="catalog-card">
-      <div class="catalog-name">Full Spin</div>
-      <div class="catalog-niche">Classic Rock · Vinyl Experience · Full Albums</div>
-      <div class="catalog-stats">
-        <div class="catalog-stat">Subscribers — <span>24.9K</span></div>
-        <div class="catalog-stat">Views Since System Launch — <span>2.66M</span></div>
-        <div class="catalog-stat">Videos with New System — <span>62</span></div>
+    <div class="cat-card">
+      <div class="cat-clips">
+        <div class="clip"><video data-vid="fullspin_1" muted loop playsinline preload="none" poster="assets/poster/fullspin_1.jpg"></video></div>
+        <div class="clip"><video data-vid="fullspin_2" muted loop playsinline preload="none" poster="assets/poster/fullspin_2.jpg"></video></div>
+        <div class="clip"><video data-vid="fullspin_3" muted loop playsinline preload="none" poster="assets/poster/fullspin_3.jpg"></video></div>
       </div>
-      <p class="catalog-role">Designed the adaptive vinyl template system — colors, label art, and tracklist pulled directly from each album's artwork. Same structure every time, never looks the same twice.</p>
+      <div class="cat-body">
+        <div class="cat-name">Full Spin</div>
+        <div class="cat-niche">Classic Rock · Vinyl Experience</div>
+        <div class="cat-stats">
+          <div class="cat-stat"><div class="cv">2.66M</div><div class="cl">views since system</div></div>
+          <div class="cat-stat"><div class="cv">62</div><div class="cl">videos on system</div></div>
+        </div>
+        <p class="cat-role">Designed the adaptive vinyl template — colors, label art, and tracklist pulled from each album's artwork. Same structure, never looks the same twice.</p>
+      </div>
     </div>
 
-    <div class="catalog-card">
-      <div class="catalog-name">Kiki.mp3</div>
-      <div class="catalog-niche">2000s Nostalgia · Alt Rock · Emo</div>
-      <div class="catalog-stats">
-        <div class="catalog-stat">Total Views — <span>2.93M</span></div>
-        <div class="catalog-stat">System Coverage — <span>70% of Top 20 Videos</span></div>
+    <div class="cat-card">
+      <div class="cat-clips">
+        <div class="clip"><video data-vid="kiki_1" muted loop playsinline preload="none" poster="assets/poster/kiki_1.jpg"></video></div>
+        <div class="clip"><video data-vid="kiki_2" muted loop playsinline preload="none" poster="assets/poster/kiki_2.jpg"></video></div>
+        <div class="clip"><video data-vid="kiki_3" muted loop playsinline preload="none" poster="assets/poster/kiki_3.jpg"></video></div>
       </div>
-      <p class="catalog-role">Designed a personalized background system on a reusable animation base — each video gets thematic props, band posters, and era objects. 70% of top 20 videos use this system, accumulating 84% of top 20 total views.</p>
+      <div class="cat-body">
+        <div class="cat-name">Kiki.mp3</div>
+        <div class="cat-niche">2000s Nostalgia · Alt Rock · Emo</div>
+        <div class="cat-stats">
+          <div class="cat-stat"><div class="cv">2.93M</div><div class="cl">total views</div></div>
+          <div class="cat-stat"><div class="cv">70%</div><div class="cl">of top-20 on system</div></div>
+        </div>
+        <p class="cat-role">A personalized background system on a reusable animation base — each video gets thematic props and era objects. 70% of top-20 videos use it, holding 84% of their views.</p>
+      </div>
     </div>
 
   </div>
 </section>
 
-<div class="divider"></div>
+<div class="rule"></div>
 
-<!-- CAPABILITIES -->
-<section id="capabilities">
-  <div class="section-label">What I Do</div>
-  <h2 class="section-title">Capabilities</h2>
-  <div class="services-grid">
-    <div class="service-card">
-      <div class="service-number">01</div>
-      <div class="service-name">Creative Operations &amp; Leadership</div>
-      <p class="service-desc">I founded and led a creative department across ~50 channels. I design the operating system for content production — SOPs, creative frameworks, briefs, and review cadences — so a small team ships at volume without quality drift or redesign churn.</p>
-      <div class="service-tags">
-        <span class="tag">Team Leadership</span>
-        <span class="tag">SOP &amp; Systems Design</span>
-        <span class="tag">Creative Direction</span>
-        <span class="tag">Content Strategy</span>
-        <span class="tag">YouTube Growth</span>
-      </div>
-    </div>
-    <div class="service-card">
-      <div class="service-number">02</div>
-      <div class="service-name">Automation &amp; Tooling</div>
-      <p class="service-desc">I find the bottleneck in a manual workflow and replace it with software (AI-assisted) — internal web apps, API orchestration, browser automation, and batch pipelines that turn hours of repetitive work into a single command.</p>
-      <div class="service-tags">
-        <span class="tag">Workflow Automation</span>
-        <span class="tag">API Orchestration</span>
-        <span class="tag">Browser Automation</span>
-        <span class="tag">Batch Pipelines</span>
-        <span class="tag">AI-Assisted Build</span>
-      </div>
-    </div>
-    <div class="service-card">
-      <div class="service-number">03</div>
-      <div class="service-name">Media &amp; AI Pipelines</div>
-      <p class="service-desc">Programmatic video and image processing at scale — FFmpeg render pipelines, computer-vision moderation, audio transcription and vocal isolation, and generative-AI workflows wired into real production.</p>
-      <div class="service-tags">
-        <span class="tag">FFmpeg</span>
-        <span class="tag">Computer Vision</span>
-        <span class="tag">Transcription</span>
-        <span class="tag">Moderation</span>
-        <span class="tag">Generative AI</span>
-      </div>
-    </div>
+<!-- CAPABILITIES + STACK -->
+<section id="stack">
+  <div class="sec-head reveal">
+    <div class="sec-label">What I do</div>
+    <h2 class="sec-title">Creative leadership and technical building — the same person.</h2>
+  </div>
+  <div class="cap-grid reveal">
+    <div class="cap"><div class="cn">01</div><h4>Creative Operations & Leadership</h4><p>Founded and led a creative department across ~50 channels. SOPs, frameworks, briefs, and review cadences so a small team ships at volume without quality drift.</p></div>
+    <div class="cap"><div class="cn">02</div><h4>Automation & Tooling</h4><p>Find the bottleneck, replace it with software (AI-assisted) — internal apps, API orchestration, browser automation, batch pipelines. Hours of work become one command.</p></div>
+    <div class="cap"><div class="cn">03</div><h4>Media & AI Pipelines</h4><p>Programmatic video and image at scale — FFmpeg renders, computer-vision moderation, transcription, and generative-AI workflows wired into real production.</p></div>
+  </div>
+  <div class="stack reveal">
+    <div><div class="sg">Build & Automation (AI-assisted)</div><ul><li>Python</li><li>TypeScript / JavaScript</li><li>React · Next.js · Node</li><li>React Native · Expo</li><li>Bash · ExtendScript</li></ul></div>
+    <div><div class="sg">Media & AI</div><ul><li>FFmpeg · OpenCV</li><li>Transcription · vocal isolation</li><li>Computer-vision moderation</li><li>Generative AI (image / video)</li><li>Browser automation (Playwright)</li></ul></div>
+    <div><div class="sg">Infra · Creative</div><ul><li>Google Cloud · Drive API</li><li>Supabase · PostgreSQL</li><li>App Store / Play Console</li><li>Premiere · After Effects</li><li>Midjourney · Veo · Runway · Gemini</li></ul></div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- STACK -->
-<section class="tools-section" id="stack">
-  <div class="section-label">Stack</div>
-  <h2 class="section-title" style="margin-bottom: 1rem;">Tools &amp; Tech</h2>
-  <p class="section-sub" style="margin-bottom: 3rem;">The stack I build and automate in — AI-assisted, shipped to production. Fluent at directing these tools to a working result, not at hand-rolling them from scratch.</p>
-  <div class="tools-grid">
-    <div>
-      <div class="tools-group-label">Build &amp; Automation (AI-assisted)</div>
-      <div class="tools-list">
-        <div class="tool-item">Python</div>
-        <div class="tool-item">TypeScript / JavaScript</div>
-        <div class="tool-item">React · Next.js</div>
-        <div class="tool-item">React Native · Expo</div>
-        <div class="tool-item">Node.js · Express</div>
-        <div class="tool-item">Bash · ExtendScript</div>
-      </div>
-    </div>
-    <div>
-      <div class="tools-group-label">Media &amp; AI</div>
-      <div class="tools-list">
-        <div class="tool-item">FFmpeg · OpenCV</div>
-        <div class="tool-item">Audio Transcription · Vocal Isolation</div>
-        <div class="tool-item">Computer-Vision Moderation</div>
-        <div class="tool-item">Generative AI (image / video)</div>
-        <div class="tool-item">Browser Automation (Playwright)</div>
-        <div class="tool-item">Supabase · PostgreSQL</div>
-      </div>
-    </div>
-    <div>
-      <div class="tools-group-label">Infra · Creative</div>
-      <div class="tools-list">
-        <div class="tool-item">Google Cloud · Drive API</div>
-        <div class="tool-item">EAS · App Store / Play Console</div>
-        <div class="tool-item">Sentry · PostHog</div>
-        <div class="tool-item">Git · CI/CD</div>
-        <div class="tool-item">Premiere · After Effects</div>
-        <div class="tool-item">Generative AI (Midjourney · Veo · Runway)</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
+<div class="rule"></div>
 
 <!-- CONTACT -->
-<section id="contact" class="contact-section">
-  <div class="contact-bg"></div>
-  <div style="position:relative;z-index:1;">
-    <h2 class="contact-cta">Let's Build<br><span>Something.</span></h2>
-    <div class="contact-links">
-      <a href="mailto:cbadelhugo@gmail.com" class="contact-link">
-        <span class="contact-link-label">Email</span>
-        <span class="contact-link-value">cbadelhugo@gmail.com</span>
-      </a>
-      <a href="https://wa.me/573123871795" class="contact-link" target="_blank">
-        <span class="contact-link-label">WhatsApp</span>
-        <span class="contact-link-value">+57 312 387 1795</span>
-      </a>
-      <a href="https://github.com/cbadelhugo" class="contact-link" target="_blank">
-        <span class="contact-link-label">GitHub</span>
-        <span class="contact-link-value">@cbadelhugo</span>
-      </a>
-      <a href="https://www.linkedin.com/in/hugo-mart%C3%ADn-badel-castro-2b6934172/" class="contact-link" target="_blank">
-        <span class="contact-link-label">LinkedIn</span>
-        <span class="contact-link-value">in/hugo-martín-badel-castro</span>
-      </a>
+<section id="contact" class="contact">
+  <div class="reveal">
+    <div class="sec-label">Open to 100% remote roles</div>
+    <h2>Let's build the <em>system.</em></h2>
+    <div class="c-links">
+      <a class="c-link" href="mailto:cbadelhugo@gmail.com"><div class="cl-lbl">Email</div><div class="cl-val">cbadelhugo@gmail.com</div></a>
+      <a class="c-link" href="https://wa.me/573123871795" target="_blank" rel="noopener"><div class="cl-lbl">WhatsApp</div><div class="cl-val">+57 312 387 1795</div></a>
+      <a class="c-link" href="https://github.com/cbadelhugo" target="_blank" rel="noopener"><div class="cl-lbl">GitHub</div><div class="cl-val">@cbadelhugo</div></a>
+      <a class="c-link" href="https://www.linkedin.com/in/hugo-mart%C3%ADn-badel-castro-2b6934172/" target="_blank" rel="noopener"><div class="cl-lbl">LinkedIn</div><div class="cl-val">in/hugo-martín-badel-castro</div></a>
+      <a class="c-link" href="https://puzzlr.app" target="_blank" rel="noopener"><div class="cl-lbl">Shipped solo</div><div class="cl-val">puzzlr.app — live on the App Store</div></a>
     </div>
   </div>
 </section>
 
 <footer>
-  <span class="footer-name">Hugo Martin — Creative Technologist &amp; Creative Operations Lead · Bogotá, Colombia · Remote</span>
-  <span class="footer-copy">2026</span>
+  <span class="footer-n">Hugo Martín — Creative Technologist & Creative Operations Lead · Bogotá · Remote</span>
+  <span class="footer-n">© 2026 · Built (AI-assisted) by Hugo</span>
 </footer>
 
+</div><!-- /wrap -->
+
 <script>
-  // Scroll reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
-        observer.unobserve(e.target);
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* Native scroll — fluid and predictable. No smooth-scroll library. */
+
+  /* ---- Reveal on scroll ---- */
+  var revs = document.querySelectorAll('.reveal');
+  var ro = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target);} });
+  },{threshold:0.12});
+  revs.forEach(function(el){ ro.observe(el); });
+
+  /* ---- Count-up numbers ---- */
+  function countUp(el){
+    var target = parseFloat(el.getAttribute('data-count'));
+    var unit = el.querySelector('.u') ? el.querySelector('.u').outerHTML : '';
+    var dur = 1100, start = null;
+    function step(ts){
+      if(!start) start = ts;
+      var p = Math.min((ts-start)/dur,1);
+      var eased = 1-Math.pow(1-p,3);
+      var val = Math.round(target*eased);
+      el.innerHTML = val + unit;
+      if(p<1) requestAnimationFrame(step);
+    }
+    if(reduce){ el.innerHTML = target + unit; return; }
+    requestAnimationFrame(step);
+  }
+  var counted = new WeakSet();
+  var co = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting && !counted.has(e.target)){ counted.add(e.target); countUp(e.target); }
+    });
+  },{threshold:0.5});
+  document.querySelectorAll('[data-count]').forEach(function(el){ co.observe(el); });
+
+  /* ---- Bar / fill grow ---- */
+  var bo = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){
+        var w = e.target.getAttribute('data-w') || e.target.getAttribute('data-fill');
+        e.target.style.transition='width 1.2s cubic-bezier(.2,.7,.2,1)';
+        e.target.style.width = w + '%';
+        bo.unobserve(e.target);
       }
     });
-  }, { threshold: 0.08 });
+  },{threshold:0.4});
+  document.querySelectorAll('[data-w],[data-fill]').forEach(function(el){ bo.observe(el); });
 
-  document.querySelectorAll('.eng-card, .case-study, .catalog-card, .service-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(18px)';
-    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
-    observer.observe(el);
-  });
+  /* ---- Lazy-attach + play videos only in view ---- */
+  var vo = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      var v = e.target;
+      if(e.isIntersecting){
+        if(!v.src && v.getAttribute('data-vid')){
+          v.src = 'assets/video/' + v.getAttribute('data-vid') + '.mp4';
+        }
+        var p = v.play(); if(p && p.catch) p.catch(function(){});
+      } else { v.pause(); }
+    });
+  },{threshold:0.25});
+  document.querySelectorAll('video[data-vid]').forEach(function(v){ vo.observe(v); });
+})();
 </script>
-
 </body>
 </html>
